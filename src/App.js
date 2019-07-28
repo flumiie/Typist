@@ -1,36 +1,30 @@
-import React from 'react';
+import React from 'react'
 // import logo from './logo.svg';
-import './assets/css/App.css';
-import WordAnim from 'react-random-word';
-import { tsMethodSignature } from '@babel/types';
+import './assets/css/App.css'
+// import WordAnim from 'react-random-word';
 
-var randomWord = require('random-words');
-var gens = '';
+var randomWord = require('random-words')
+var gens = ''
 
 export default class Main extends React.Component {
   constructor(props)
   {
     super(props)
-
     this.wordRenderer = this.wordRenderer.bind(this)
 
-    gens = randomWord({ exactly: 18, min: 1, max: 9, join: ' ' });
+    gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
     while(gens.length !== 117)
-      gens = randomWord({ exactly: 18, min: 1, max: 9, join: ' ' });
+      gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
+      
     this.state = {
-      generator: randomWord({ exactly: 18, min: 1, max: 9, join: ' ' })
-    }
-
-    if(this.state.generator.length != 117)
-    {
-      this.setState({ generator: randomWord({ exactly: 18, min: 1, max: 9, join: ' ' }) })
+      generator: gens
     }
   }
   wordRenderer = () =>
   {
-    gens = randomWord({ exactly: 18, min: 1, max: 9, join: ' ' });
+    gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
     while(gens.length !== 117)
-      gens = randomWord({ exactly: 18, min: 1, max: 9, join: ' ' });
+      gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
     
     this.setState({ generator: gens })
   }
@@ -55,7 +49,7 @@ export default class Main extends React.Component {
               </div>
               <div id="typing-box">
                 <input type="text" />&nbsp;
-                <button id="redo" onClick={this.wordRenderer}>↻</button>
+                <button id="redo" onClick={ this.wordRenderer }>↻</button>
               </div>
               
             </div>
