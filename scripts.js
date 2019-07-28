@@ -1,7 +1,10 @@
-var typedWord, typedChar, toType, counter = 1;
+var typedWord, typedChar, toType
+var storedWords = '', counter = 1
+var spl, temp = []
+
 function wordsToString()
 {
-    toType = [];
+    toType = []
     if($('.to-type span p#' + counter).css('background-color') != 'rgb(0, 128, 0)' ||
        $('.to-type span p#' + counter).css('background-color') != 'rgb(255, 0, 0)')
         toType.push($('.to-type span p#' + counter).html())
@@ -9,15 +12,11 @@ function wordsToString()
         toType = toType.splice((counter-1), 1)
 }
 
-function countLines()
-{
-    console.log($('.to-type span p#1').offset().top)
-}
-
 $(document).ready(function()
 {
-    var spl = $('.to-type span').html().split(' ');
-    var temp = []
+    localStorage.removeItem('Typed words')
+    $('#typing-box input').focus()
+    spl = $('.to-type span').html().split(' ')
     wordsToString()
 
     for(var i = 0; i < spl.length; i++)
@@ -33,21 +32,39 @@ $(document).ready(function()
             $('#typing-box input').val('')
             wordsToString()
 
-            if(typedWord == '') null
+            if(typedWord == ''){}
             else
             {
                 if(typedWord != undefined)
                 {
                     if(typedWord == $('.to-type span p#' + counter).html())
                     {
-                        $('.to-type span p#' + (counter)).css('background-color', 'green')
+                        $('.to-type span p#' + counter).css('color', '#8BC34A')
+                        $('.to-type span p#' + counter).css('background-color', '')
+                        storedWords += toType[0] + ' '
+                        localStorage.setItem('Typed words', storedWords)
                     }
                     else
                     {
-                        $('.to-type span p#' + (counter)).css('background-color', 'red')
+                        $('.to-type span p#' + counter).css('color', 'white')
+                        $('.to-type span p#' + counter).css('background-color', '#E91E63')
                     }
                     counter++
                 }
+            }
+
+            if($('.to-type span p#' + counter).offset().top != $('.to-type span p#1').offset().top)
+            {
+                // Shift paragraph up by one and generate new second line paragraph
+                for(var i = 1; i < counter; i++)
+                {
+                    $('.to-type span p#' + i).remove()
+                }
+                for(var j = 0; j < $('.to-type span p').length; j++)
+                {
+                    $('.to-type span p#' + (counter+j)).attr('id', j+1)
+                }
+                counter = 1
             }
         }
     })
@@ -58,25 +75,48 @@ $(document).ready(function()
         typedChar = $('#typing-box input').val().trim().split('')
         wordsToString()
 
-        if($('.to-type span p#' + counter).offset().top != $('.to-type span p#1').offset().top)
-        {
-            //TODO: Shift paragraph up by one and generate new second line paragraph
-        }
-
         if(typedChar.length == 0)
-            $('#typing-box input').css('background-color', 'white')
+        {
+            $('.to-type span p#' + counter).css('background-color', '')
+            $('#typing-box input').css('background-color', '')
+        }
         else
         {
             for(var i = 0; i < typedChar.length; i++)
             {
                 if(typedChar[i] == toType[0].split('')[i])
-                    $('#typing-box input').css('background-color', 'white')
+                {
+                    $('.to-type span p#' + counter).css('background-color', '')
+                    $('#typing-box input').css('background-color', '')
+                }
                 else
                 {
-                    $('#typing-box input').css('background-color', 'red')
-                    break;
+                    $('.to-type span p#' + counter).css('background-color', '#E91E63')
+                    $('#typing-box input').css('background-color', '#E91E63')
+                    break
                 }
             }
         }
+    })
+
+    $('#typing-box button').on('click', function()
+    {
+        counter = 1
+        $('#typing-box input').val('').css('background', 'white')
+        $('#typing-box input').focus()
+        typedWord = $('#typing-box input').val().trim().split(' ')
+        typedChar = $('#typing-box input').val().trim().split('')
+
+        setTimeout(function()
+        {
+            spl = $('.to-type span').html().split(' ')
+            temp = []
+            for(var i = 0; i < spl.length; i++)
+            {
+                temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p> ')
+            }
+            $('.to-type span').html(temp)
+            wordsToString()
+        }, 75)
     })
 })
