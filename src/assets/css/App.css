@@ -1,0 +1,70 @@
+.container
+{
+  text-align: center;
+}
+.header
+{
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.whole-bag-of-jellybean
+{
+  border-radius: 10px;
+  width: 50%;
+  height: 250px;
+  background: gray;
+}
+.options
+{
+  margin-top: 15px
+}
+.typing-container
+{
+  vertical-align: auto;
+  height: 110px
+}
+.typing-container input
+{
+  width: 75%;
+  height: 45px;
+}
+.typing-container button
+{
+  width: 50px;
+  height: 50px;
+  border: none;
+  background: rgb(156, 144, 120);
+  
+  background-image: linear-gradient(orange 50%, orange 50%);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  transition: background-size .25s ease-in, color .5s ease;
+}
+.typing-container button:hover
+{
+  background-size: 100% 100%;
+  color:white
+}
+.to-type
+{
+  position: relative;
+  width: 80%;
+  height: 110px;
+  margin-left: 50%;
+  transform: translateX(-50%)
+}
+.to-type span { width: 80% }
+#typing-box
+{
+  position: relative;
+  background: gray;
+  padding: 15px 0;
+  margin-top: -15px
+}

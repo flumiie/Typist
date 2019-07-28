@@ -1,26 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+import './assets/css/App.css';
+import WordAnim from 'react-random-word';
 
-function App() {
+var randomWord = require('random-words');
+var rando = randomWord({ exactly: 18, min: 1, max: 9, join: ' ' });
+while(rando.length != 117)
+{
+  rando = randomWord({ exactly: 18, min: 1, max: 9, join: ' ' });
+}
+
+function Main() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="container">
+      <header className="header">
+        <div className="whole-bag-of-jellybean">
+          <div className="options">
+            Options
+          </div>
+          <div className="typing-container">
+            <div className="to-type">
+              <WordAnim
+                word={ rando }
+                speed={75}
+                rounds={5}
+                letters="0123456789~!@#$%^&*()_+ &nbsp;"
+              />
+            </div>
+            <div id="typing-box">
+              <input type="text" />&nbsp;
+              <button id="redo">↻</button>
+            </div>
+            
+          </div>
+        </div>
       </header>
     </div>
   );
 }
 
-export default App;
+export default Main;
