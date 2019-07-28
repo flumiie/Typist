@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/typist/static/css/main.2cce8147.chunk.css",
-    "main.js": "/typist/static/js/main.75f9133c.chunk.js",
-    "main.js.map": "/typist/static/js/main.75f9133c.chunk.js.map",
-    "runtime~main.js": "/typist/static/js/runtime~main.d64f5b95.js",
-    "runtime~main.js.map": "/typist/static/js/runtime~main.d64f5b95.js.map",
-    "static/js/2.b41502e9.chunk.js": "/typist/static/js/2.b41502e9.chunk.js",
-    "static/js/2.b41502e9.chunk.js.map": "/typist/static/js/2.b41502e9.chunk.js.map",
-    "index.html": "/typist/index.html",
-    "precache-manifest.e2ee66ccce11d317a04c2c3330ed6a6d.js": "/typist/precache-manifest.e2ee66ccce11d317a04c2c3330ed6a6d.js",
-    "service-worker.js": "/typist/service-worker.js",
-    "static/css/main.2cce8147.chunk.css.map": "/typist/static/css/main.2cce8147.chunk.css.map",
-    "static/media/logo.svg": "/typist/static/media/logo.5d5d9eef.svg"
+    "main.css": "/Typist/static/css/main.6796b204.chunk.css",
+    "main.js": "/Typist/static/js/main.748a1ba9.chunk.js",
+    "main.js.map": "/Typist/static/js/main.748a1ba9.chunk.js.map",
+    "runtime~main.js": "/Typist/static/js/runtime~main.95a67731.js",
+    "runtime~main.js.map": "/Typist/static/js/runtime~main.95a67731.js.map",
+    "static/js/2.0815e6a2.chunk.js": "/Typist/static/js/2.0815e6a2.chunk.js",
+    "static/js/2.0815e6a2.chunk.js.map": "/Typist/static/js/2.0815e6a2.chunk.js.map",
+    "index.html": "/Typist/index.html",
+    "precache-manifest.5cc65b3b331fd7765b6d5b6ddac46efe.js": "/Typist/precache-manifest.5cc65b3b331fd7765b6d5b6ddac46efe.js",
+    "service-worker.js": "/Typist/service-worker.js",
+    "static/css/main.6796b204.chunk.css.map": "/Typist/static/css/main.6796b204.chunk.css.map"
   }
 }
