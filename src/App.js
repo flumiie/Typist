@@ -1,4 +1,5 @@
 import React from 'react'
+import $ from 'jquery';
 // import logo from './logo.svg';
 import './assets/css/App.css'
 // import WordAnim from 'react-random-word';
@@ -20,6 +21,7 @@ export default class Main extends React.Component {
       generator: gens
     }
   }
+
   wordRenderer = () =>
   {
     gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
@@ -55,6 +57,15 @@ export default class Main extends React.Component {
             </div>
           </div>
         </header>
+        {
+          // window.addEventListener('DOMContentLoaded', function()
+          // {
+          //   var counter = 1;
+          //   if($('.to-type span p#' + counter).offset().top)
+          //   if($('.to-type span p#' + counter).offset().top != $('.to-type span p#1').offset().top)
+          //     console.log('changed')
+          // })
+        }
       </div>
     );
   }

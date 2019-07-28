@@ -1,4 +1,5 @@
-var typedWord, typedChar, toType, counter = 1
+var typedWord, typedChar, toType
+var storedWords = '', counter = 1
 var spl, temp = []
 
 function wordsToString()
@@ -13,6 +14,7 @@ function wordsToString()
 
 $(document).ready(function()
 {
+    localStorage.removeItem('Typed words')
     $('#typing-box input').focus()
     spl = $('.to-type span').html().split(' ')
     wordsToString()
@@ -37,14 +39,32 @@ $(document).ready(function()
                 {
                     if(typedWord == $('.to-type span p#' + counter).html())
                     {
-                        $('.to-type span p#' + (counter)).css('color', '#8BC34A')
+                        $('.to-type span p#' + counter).css('color', '#8BC34A')
+                        $('.to-type span p#' + counter).css('background-color', '')
+                        storedWords += toType[0] + ' '
+                        localStorage.setItem('Typed words', storedWords)
                     }
                     else
                     {
-                        $('.to-type span p#' + (counter)).css('color', '#E91E63')
+                        $('.to-type span p#' + counter).css('color', 'white')
+                        $('.to-type span p#' + counter).css('background-color', '#E91E63')
                     }
                     counter++
                 }
+            }
+
+            if($('.to-type span p#' + counter).offset().top != $('.to-type span p#1').offset().top)
+            {
+                // Shift paragraph up by one and generate new second line paragraph
+                for(var i = 1; i < counter; i++)
+                {
+                    $('.to-type span p#' + i).remove()
+                }
+                for(var j = 0; j < $('.to-type span p').length; j++)
+                {
+                    $('.to-type span p#' + (counter+j)).attr('id', j+1)
+                }
+                counter = 1
             }
         }
     })
@@ -54,11 +74,6 @@ $(document).ready(function()
         typedWord = $('#typing-box input').val().trim().split(' ')
         typedChar = $('#typing-box input').val().trim().split('')
         wordsToString()
-
-        if($('.to-type span p#' + counter).offset().top != $('.to-type span p#1').offset().top)
-        {
-            //TODO: Shift paragraph up by one and generate new second line paragraph
-        }
 
         if(typedChar.length == 0)
         {

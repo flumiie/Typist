@@ -5,6 +5,7 @@
   "homepage": "https://fralyx.github.io/Typist",
   "dependencies": {
     "gh-pages": "^2.0.1",
+    "jquery": "^3.4.1",
     "random-words": "^1.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
