@@ -2,18 +2,37 @@ import React from 'react';
 // import logo from './logo.svg';
 import './assets/css/App.css';
 import WordAnim from 'react-random-word';
+import { tsMethodSignature } from '@babel/types';
 
 var randomWord = require('random-words');
+var gens = '';
 
 export default class Main extends React.Component {
+  constructor(props)
+  {
+    super(props)
+
+    this.wordRenderer = this.wordRenderer.bind(this)
+
+    gens = randomWord({ exactly: 18, min: 1, max: 9, join: ' ' });
+    while(gens.length !== 117)
+      gens = randomWord({ exactly: 18, min: 1, max: 9, join: ' ' });
+    this.state = {
+      generator: randomWord({ exactly: 18, min: 1, max: 9, join: ' ' })
+    }
+
+    if(this.state.generator.length != 117)
+    {
+      this.setState({ generator: randomWord({ exactly: 18, min: 1, max: 9, join: ' ' }) })
+    }
+  }
   wordRenderer = () =>
   {
-    var generator = randomWord({ exactly: 18, min: 1, max: 9, join: ' ' })
-    while(generator.length !== 117)
-    {
-      generator = randomWord({ exactly: 18, min: 1, max: 9, join: ' ' })
-    }
-    return generator
+    gens = randomWord({ exactly: 18, min: 1, max: 9, join: ' ' });
+    while(gens.length !== 117)
+      gens = randomWord({ exactly: 18, min: 1, max: 9, join: ' ' });
+    
+    this.setState({ generator: gens })
   }
   
   render() {
@@ -32,11 +51,11 @@ export default class Main extends React.Component {
                   rounds={5}
                   letters="0123456789~!@#$%^&*()_+ &nbsp;"
                 /> */}
-                <span>{ this.wordRenderer() }</span>
+                <span>{ this.state.generator }</span>
               </div>
               <div id="typing-box">
                 <input type="text" />&nbsp;
-                <button id="redo">↻</button>
+                <button id="redo" onClick={this.wordRenderer}>↻</button>
               </div>
               
             </div>

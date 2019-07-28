@@ -9,10 +9,15 @@ function wordsToString()
         toType = toType.splice((counter-1), 1)
 }
 
+function countLines()
+{
+    console.log($('.to-type span p#1').offset().top)
+}
+
 $(document).ready(function()
 {
     var spl = $('.to-type span').html().split(' ');
-    temp = []
+    var temp = []
     wordsToString()
 
     for(var i = 0; i < spl.length; i++)
@@ -27,7 +32,7 @@ $(document).ready(function()
         {
             $('#typing-box input').val('')
             wordsToString()
-            // console.log(toType)
+
             if(typedWord == '') null
             else
             {
@@ -52,6 +57,11 @@ $(document).ready(function()
         typedWord = $('#typing-box input').val().trim().split(' ')
         typedChar = $('#typing-box input').val().trim().split('')
         wordsToString()
+
+        if($('.to-type span p#' + counter).offset().top != $('.to-type span p#1').offset().top)
+        {
+            //TODO: Shift paragraph up by one and generate new second line paragraph
+        }
 
         if(typedChar.length == 0)
             $('#typing-box input').css('background-color', 'white')
