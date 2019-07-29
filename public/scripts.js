@@ -5,9 +5,9 @@ var spl, temp = []
 function wordsToString()
 {
     toType = []
-    if($('.to-type span p#' + counter).css('background-color') != 'rgb(0, 128, 0)' ||
-       $('.to-type span p#' + counter).css('background-color') != 'rgb(255, 0, 0)')
-        toType.push($('.to-type span p#' + counter).html())
+    if($('.to-type p#' + counter).css('background-color') != 'rgb(0, 128, 0)' ||
+       $('.to-type p#' + counter).css('background-color') != 'rgb(255, 0, 0)')
+        toType.push($('.to-type p#' + counter).html())
     else
         toType = toType.splice((counter-1), 1)
 }
@@ -37,32 +37,33 @@ $(document).ready(function()
             {
                 if(typedWord != undefined)
                 {
-                    if(typedWord == $('.to-type span p#' + counter).html())
+                    $('.to-type p#' + (counter+1)).css('background-color', 'cyan')
+                    if(typedWord == $('.to-type p#' + counter).html())
                     {
-                        $('.to-type span p#' + counter).css('color', '#8BC34A')
-                        $('.to-type span p#' + counter).css('background-color', '')
+                        $('.to-type p#' + counter).css('color', '#8BC34A')
+                        $('.to-type p#' + counter).css('background-color', '')
                         storedWords += toType[0] + ' '
                         localStorage.setItem('Typed words', storedWords)
                     }
                     else
                     {
-                        $('.to-type span p#' + counter).css('color', 'white')
-                        $('.to-type span p#' + counter).css('background-color', '#E91E63')
+                        $('.to-type p#' + counter).css('color', 'white')
+                        $('.to-type p#' + counter).css('background-color', '#E91E63')
                     }
                     counter++
                 }
             }
 
-            if($('.to-type span p#' + counter).offset().top != $('.to-type span p#1').offset().top)
+            if($('.to-type p#' + counter).offset().top != $('.to-type p#1').offset().top)
             {
                 // Shift paragraph up by one and generate new second line paragraph
                 for(var i = 1; i < counter; i++)
                 {
-                    $('.to-type span p#' + i).remove()
+                    $('.to-type p#' + i).remove()
                 }
-                for(var j = 0; j < $('.to-type span p').length; j++)
+                for(var j = 0; j < $('.to-type p').length; j++)
                 {
-                    $('.to-type span p#' + (counter+j)).attr('id', j+1)
+                    $('.to-type p#' + (counter+j)).attr('id', j+1)
                 }
                 counter = 1
             }
@@ -77,7 +78,7 @@ $(document).ready(function()
 
         if(typedChar.length == 0)
         {
-            $('.to-type span p#' + counter).css('background-color', '')
+            $('.to-type p#' + counter).css('background-color', '')
             $('#typing-box input').css('background-color', '')
         }
         else
@@ -86,12 +87,12 @@ $(document).ready(function()
             {
                 if(typedChar[i] == toType[0].split('')[i])
                 {
-                    $('.to-type span p#' + counter).css('background-color', '')
+                    $('.to-type p#' + counter).css('background-color', '')
                     $('#typing-box input').css('background-color', '')
                 }
                 else
                 {
-                    $('.to-type span p#' + counter).css('background-color', '#E91E63')
+                    $('.to-type p#' + counter).css('background-color', '#E91E63')
                     $('#typing-box input').css('background-color', '#E91E63')
                     break
                 }

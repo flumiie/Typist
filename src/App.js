@@ -1,37 +1,82 @@
 import React from 'react'
-import $ from 'jquery';
+import $ from 'jquery'
 // import logo from './logo.svg';
 import './assets/css/App.css'
 // import WordAnim from 'react-random-word';
 
 var randomWord = require('random-words')
-var gens = ''
 
 export default class Main extends React.Component {
   constructor(props)
   {
     super(props)
     this.wordRenderer = this.wordRenderer.bind(this)
+    this.counter = 1
+    this.type = ''
+    this.gens = ''
 
-    gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
-    while(gens.length !== 117)
-      gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
+    this.gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
+    while(this.gens.length !== 117)
+      this.gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
       
     this.state = {
-      generator: gens
+      generator: this.gens
     }
   }
 
   wordRenderer = () =>
   {
-    gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
-    while(gens.length !== 117)
-      gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
+    this.gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
+    while(this.gens.length !== 117)
+      this.gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
     
-    this.setState({ generator: gens })
+    this.setState({ generator: this.gens })
+  }
+
+  componentDidMount()
+  {
+    $('#typing-box input').keypress(function(event)
+    {
+      setTimeout(function()
+      {
+        this.type = $('#typing-box input').val()
+      }, 70)
+
+      if(event.which === 32 || event.keyCode === 32)
+      {
+        // if($('.to-type p').length < 15)
+        //   this.gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
+      }
+    })
+
+    // this.setState({ generator: this.gens })
   }
   
   render() {
+    $(document).ready(function()
+    {
+      var counter = 1, type = ''
+      $('#typing-box input').keypress(function(event)
+      {
+        setTimeout(function()
+        {
+          type = $('#typing-box input').val()
+          if(event.which === 32 || event.keyCode === 32)
+            if(type !== '')
+              counter++
+        }, 70)
+
+        if($('.to-type p').length < 14)
+        {
+          if(event.which === 32 || event.keyCode === 32)
+          {
+            this.gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
+            // this.setState({ generator: this.gens })
+          }
+        }
+      })
+    })
+
     return (
       <div className="container">
         <header className="header">
@@ -57,15 +102,6 @@ export default class Main extends React.Component {
             </div>
           </div>
         </header>
-        {
-          // window.addEventListener('DOMContentLoaded', function()
-          // {
-          //   var counter = 1;
-          //   if($('.to-type span p#' + counter).offset().top)
-          //   if($('.to-type span p#' + counter).offset().top != $('.to-type span p#1').offset().top)
-          //     console.log('changed')
-          // })
-        }
       </div>
     );
   }
