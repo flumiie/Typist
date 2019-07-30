@@ -17,15 +17,23 @@
 {
   border-radius: 10px;
   width: 55%;
-  height: 150px;
   background: gray
 }
-.options
+.top-container
 {
+  display: inline-flex;
+  width: 97%;
   margin-top: 15px
 }
+.top-container .options,
+.top-container .timer
+{
+  display: flex;
+  width: 50%
+}
+.top-container .timer { flex-direction: row-reverse }
 
-.typing-container { height: 3.5em }
+.typing-container { height: 3.35em }
 #typing-box
 {
   position: relative;

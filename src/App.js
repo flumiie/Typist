@@ -63,8 +63,11 @@ export default class Main extends React.Component {
       <div className="container">
         <header className="header">
           <div className="whole-bag-of-jellybean">
-            <div className="options">
-              Options
+            <div className="top-container">
+              <div className="options">
+                Options
+              </div>
+              <div className="timer">0</div>
             </div>
             <div className="typing-container">
               <div className="to-type">
