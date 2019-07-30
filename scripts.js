@@ -1,5 +1,5 @@
-var typedWord, typedChar, toType
-var storedWords = '', counter = 1
+var typedWord, typedChar, toType, lineCount = 1, counter = 1
+var correctWords = [], wrongWords = [];
 var spl, temp = []
 
 function wordsToString()
@@ -14,16 +14,16 @@ function wordsToString()
 
 $(document).ready(function()
 {
-    localStorage.removeItem('Typed words')
     $('#typing-box input').focus()
     spl = $('.to-type span').html().split(' ')
     wordsToString()
 
     for(var i = 0; i < spl.length; i++)
     {
-        temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p> ')
+        temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>' + ' ')
     }
     $('.to-type span').html(temp)
+    $('.to-type p#1').css('background-color', '#0CC')
 
     $('#typing-box input').keypress(function()
     {
@@ -37,35 +37,34 @@ $(document).ready(function()
             {
                 if(typedWord != undefined)
                 {
-                    $('.to-type p#' + (counter+1)).css('background-color', 'cyan')
+                    $('.to-type p#' + (counter+1)).css('background-color', '#0CC')
                     if(typedWord == $('.to-type p#' + counter).html())
                     {
                         $('.to-type p#' + counter).css('color', '#8BC34A')
                         $('.to-type p#' + counter).css('background-color', '')
-                        storedWords += toType[0] + ' '
-                        localStorage.setItem('Typed words', storedWords)
+                        correctWords.push(toType[0])
+                        wrongWords.push('')
                     }
                     else
                     {
                         $('.to-type p#' + counter).css('color', 'white')
-                        $('.to-type p#' + counter).css('background-color', '#E91E63')
+                        $('.to-type p#' + counter).css('color', '#E91E63')
+                        $('.to-type p#' + counter).css('background-color', '')
+                        correctWords.push('')
+                        wrongWords.push(toType[0])
                     }
                     counter++
                 }
             }
-
-            if($('.to-type p#' + counter).offset().top != $('.to-type p#1').offset().top)
+            
+            // Shift paragraph up by one and generate new second line paragraph
+            if($('.to-type p#' + counter).offset().top > $('.to-type p#' + lineCount).offset().top)
             {
-                // Shift paragraph up by one and generate new second line paragraph
-                for(var i = 1; i < counter; i++)
+                for(var i = lineCount; i < counter; i++)
                 {
                     $('.to-type p#' + i).remove()
                 }
-                for(var j = 0; j < $('.to-type p').length; j++)
-                {
-                    $('.to-type p#' + (counter+j)).attr('id', j+1)
-                }
-                counter = 1
+                lineCount = counter
             }
         }
     })
@@ -78,7 +77,7 @@ $(document).ready(function()
 
         if(typedChar.length == 0)
         {
-            $('.to-type p#' + counter).css('background-color', '')
+            $('.to-type p#' + counter).css('background-color', '#0CC')
             $('#typing-box input').css('background-color', '')
         }
         else
@@ -87,7 +86,7 @@ $(document).ready(function()
             {
                 if(typedChar[i] == toType[0].split('')[i])
                 {
-                    $('.to-type p#' + counter).css('background-color', '')
+                    $('.to-type p#' + counter).css('background-color', '#0CC')
                     $('#typing-box input').css('background-color', '')
                 }
                 else
@@ -102,6 +101,8 @@ $(document).ready(function()
 
     $('#typing-box button').on('click', function()
     {
+        correctWords = []
+        wrongWords = []
         counter = 1
         $('#typing-box input').val('').css('background', 'white')
         $('#typing-box input').focus()
@@ -114,9 +115,10 @@ $(document).ready(function()
             temp = []
             for(var i = 0; i < spl.length; i++)
             {
-                temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p> ')
+                temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>' + ' ')
             }
             $('.to-type span').html(temp)
+            $('.to-type p#1').css('background-color', '#0CC')
             wordsToString()
         }, 75)
     })
