@@ -1,6 +1,6 @@
 var typedWord, typedChar, toType, lineCount = 1, counter = 1
-var correctWords = [], wrongWords = [];
-var spl, temp = []
+var correctWords = [], wrongWords = [], spl, temp = []
+var typedOncePerRedo = false, timerInterval = null, timer = 60
 
 function wordsToString()
 {
@@ -13,6 +13,7 @@ function wordsToString()
 
 $(document).ready(function()
 {
+    $('.timer').html(timer)
     $('#typing-box input').focus()
     spl = $('.to-type span').html().split(' ')
     wordsToString()
@@ -31,7 +32,7 @@ $(document).ready(function()
         {
             $('#typing-box input').val('')
             toType = $('.to-type p#' + counter).html()
-            wordsToString();
+            wordsToString()
 
             if(typedWord == ''){}
             else
@@ -72,6 +73,11 @@ $(document).ready(function()
 
     $('#typing-box input').on('input', function()
     {
+        if(typedOncePerRedo == false)
+        {
+            startCalc()
+            typedOncePerRedo = true
+        }
         typedWord = $('#typing-box input').val().trim()
         typedChar = $('#typing-box input').val().trim().split('')
         toType = $('.to-type p#' + counter).html()
@@ -98,9 +104,18 @@ $(document).ready(function()
 
     $('#typing-box button').on('click', function()
     {
+        $('.typing-container').css('height', '3.35em')
+        $('#typing-box input').removeAttr('disabled')
+
         correctWords = []
         wrongWords = []
         counter = 1
+
+        typedOncePerRedo = false
+        timer = 60
+        $('.timer').html(timer)
+        startCalc()
+
         toType = $('.to-type p#' + counter).html()
         $('#typing-box input').val('').css('background', 'white')
         $('#typing-box input').focus()
@@ -120,4 +135,35 @@ $(document).ready(function()
             toType = $('.to-type p#' + counter).html()
         }, 75)
     })
+
+    /**
+     * WPM Calculator
+     * Start calculate for each 1 second
+     */
+    function startCalc()
+    {
+        if(timerInterval == null)
+        {
+            timerInterval = setInterval(function()
+            {
+                if(timer >= 2)
+                {
+                    timer -= 1
+                    $('.timer').html(timer)
+                }
+                else
+                {
+                    $('.timer').html(0)
+                    $('.typing-container').css('height', '1em')
+                    $('.to-type span p').remove()
+                    $('#typing-box input').val('').attr('disabled', true)
+                }
+            }, 1000)
+        }
+        else
+        {
+            clearInterval(timerInterval)
+            timerInterval = null
+        }
+    }
 })
