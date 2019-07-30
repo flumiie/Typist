@@ -16,7 +16,7 @@
 .whole-bag-of-jellybean
 {
   border-radius: 10px;
-  width: 50%;
+  width: 55%;
   height: 250px;
   background: gray;
 }
@@ -24,18 +24,22 @@
 {
   margin-top: 15px
 }
-.typing-container
+#typing-box
 {
+  position: relative;
+  background: gray;
+  padding: 15px 0;
+  margin-top: -15px;
   vertical-align: auto;
   height: 110px
 }
-.typing-container input
+#typing-box input
 {
   border: none;
   width: 75%;
   height: 45px;
 }
-.typing-container button
+#typing-box button
 {
   width: 50px;
   height: 50px;
@@ -48,29 +52,21 @@
   background-size: 0% 100%;
   transition: background-size .25s ease-in, color .5s ease;
 }
-.typing-container button:hover
+#typing-box button:hover
 {
   background-size: 100% 100%;
-  color:white
+  color:white;
+  /* width: 80% */
 }
 .to-type
 {
   position: relative;
-  width: 80%;
-  height: 110px;
-  margin-left: 50%;
-  transform: translateX(-50%)
+  overflow: hidden;
+  height: 3.5em;
+  padding: 0 5%
 }
-.to-type span { width: 80% }
 .to-type span p
 {
-  display: inline;
-  margin: 0
-}
-#typing-box
-{
-  position: relative;
-  background: gray;
-  padding: 15px 0;
-  margin-top: -15px
+  display: inline-flex;
+  margin: 0 auto;
 }

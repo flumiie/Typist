@@ -11,14 +11,11 @@ export default class Main extends React.Component {
   {
     super(props)
     this.wordRenderer = this.wordRenderer.bind(this)
-    this.counter = 1
+    this.cnt = 1
     this.type = ''
     this.gens = ''
-
-    this.gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
-    while(this.gens.length !== 117)
-      this.gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
-      
+    this.totalWordsPerMinute = 400
+    this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 1, max: 9, join: ' ' })
     this.state = {
       generator: this.gens
     }
@@ -26,53 +23,38 @@ export default class Main extends React.Component {
 
   wordRenderer = () =>
   {
-    this.gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
-    while(this.gens.length !== 117)
-      this.gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
-    
+    this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 1, max: 9, join: ' ' })
     this.setState({ generator: this.gens })
   }
 
   componentDidMount()
   {
-    $('#typing-box input').keypress(function(event)
+    $('#typing-box input').keypress(function()
     {
       setTimeout(function()
       {
         this.type = $('#typing-box input').val()
       }, 70)
-
-      if(event.which === 32 || event.keyCode === 32)
-      {
-        // if($('.to-type p').length < 15)
-        //   this.gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
-      }
     })
-
-    // this.setState({ generator: this.gens })
   }
   
   render() {
     $(document).ready(function()
     {
-      var counter = 1, type = ''
       $('#typing-box input').keypress(function(event)
       {
         setTimeout(function()
         {
-          type = $('#typing-box input').val()
+          this.type = $('#typing-box input').val()
           if(event.which === 32 || event.keyCode === 32)
-            if(type !== '')
-              counter++
+            if(this.type !== '')
+              this.cnt++
         }, 70)
 
         if($('.to-type p').length < 14)
         {
           if(event.which === 32 || event.keyCode === 32)
-          {
-            this.gens = randomWord({ exactly: 21, min: 1, max: 9, join: ' ' })
-            // this.setState({ generator: this.gens })
-          }
+            this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 1, max: 9, join: ' ' })
         }
       })
     })
@@ -94,11 +76,10 @@ export default class Main extends React.Component {
                 /> */}
                 <span>{ this.state.generator }</span>
               </div>
-              <div id="typing-box">
-                <input type="text" />&nbsp;
-                <button id="redo" onClick={ this.wordRenderer }>↻</button>
-              </div>
-              
+            </div>
+            <div id="typing-box">
+              <input type="text" />&nbsp;
+              <button id="redo" onClick={ this.wordRenderer }>↻</button>
             </div>
           </div>
         </header>
