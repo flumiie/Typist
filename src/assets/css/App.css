@@ -1,6 +1,6 @@
 .container
 {
-  text-align: center;
+  text-align: center
 }
 .header
 {
@@ -11,19 +11,20 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: white
 }
 .whole-bag-of-jellybean
 {
   border-radius: 10px;
   width: 55%;
-  height: 250px;
-  background: gray;
+  height: 150px;
+  background: gray
 }
 .options
 {
   margin-top: 15px
 }
+.typing-container { height: 3.5em }
 #typing-box
 {
   position: relative;
@@ -31,13 +32,13 @@
   padding: 15px 0;
   margin-top: -15px;
   vertical-align: auto;
-  height: 110px
+  border-radius: 10px
 }
 #typing-box input
 {
   border: none;
   width: 75%;
-  height: 45px;
+  height: 45px
 }
 #typing-box button
 {
@@ -50,13 +51,12 @@
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: 0% 100%;
-  transition: background-size .25s ease-in, color .5s ease;
+  transition: background-size .25s ease-in, color .5s ease
 }
 #typing-box button:hover
 {
   background-size: 100% 100%;
-  color:white;
-  /* width: 80% */
+  color:white
 }
 .to-type
 {
@@ -68,5 +68,5 @@
 .to-type span p
 {
   display: inline-flex;
-  margin: 0 auto;
+  margin: 0 auto
 }
