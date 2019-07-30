@@ -4,12 +4,11 @@ var spl, temp = []
 
 function wordsToString()
 {
-    toType = []
-    if($('.to-type p#' + counter).css('background-color') != 'rgb(0, 128, 0)' ||
-       $('.to-type p#' + counter).css('background-color') != 'rgb(255, 0, 0)')
-        toType.push($('.to-type p#' + counter).html())
-    else
-        toType = toType.splice((counter-1), 1)
+    
+    // if(typedWord
+    //     toType.push($('.to-type p#' + counter).html())
+    // else
+    //     toType = toType.splice((counter-1), 1)
 }
 
 $(document).ready(function()
@@ -24,13 +23,15 @@ $(document).ready(function()
     }
     $('.to-type span').html(temp)
     $('.to-type p#1').css('background-color', '#0CC')
+    toType = $('.to-type p#' + counter).html()
 
     $('#typing-box input').keypress(function()
     {
         if(event.which == 32 || event.keyCode == 32)
         {
             $('#typing-box input').val('')
-            wordsToString()
+            toType = $('.to-type p#' + counter).html()
+            wordsToString();
 
             if(typedWord == ''){}
             else
@@ -42,7 +43,7 @@ $(document).ready(function()
                     {
                         $('.to-type p#' + counter).css('color', '#8BC34A')
                         $('.to-type p#' + counter).css('background-color', '')
-                        correctWords.push(toType[0])
+                        correctWords.push(toType)
                         wrongWords.push('')
                     }
                     else
@@ -51,12 +52,12 @@ $(document).ready(function()
                         $('.to-type p#' + counter).css('color', '#E91E63')
                         $('.to-type p#' + counter).css('background-color', '')
                         correctWords.push('')
-                        wrongWords.push(toType[0])
+                        wrongWords.push(toType)
                     }
                     counter++
                 }
             }
-            
+
             // Shift paragraph up by one and generate new second line paragraph
             if($('.to-type p#' + counter).offset().top > $('.to-type p#' + lineCount).offset().top)
             {
@@ -71,9 +72,8 @@ $(document).ready(function()
 
     $('#typing-box input').on('input', function()
     {
-        typedWord = $('#typing-box input').val().trim().split(' ')
+        typedWord = $('#typing-box input').val().trim()
         typedChar = $('#typing-box input').val().trim().split('')
-        wordsToString()
 
         if(typedChar.length == 0)
         {
@@ -84,7 +84,7 @@ $(document).ready(function()
         {
             for(var i = 0; i < typedChar.length; i++)
             {
-                if(typedChar[i] == toType[0].split('')[i])
+                if(toType.match(typedWord))
                 {
                     $('.to-type p#' + counter).css('background-color', '#0CC')
                     $('#typing-box input').css('background-color', '')
@@ -104,6 +104,7 @@ $(document).ready(function()
         correctWords = []
         wrongWords = []
         counter = 1
+        toType = $('.to-type p#' + counter).html()
         $('#typing-box input').val('').css('background', 'white')
         $('#typing-box input').focus()
         typedWord = $('#typing-box input').val().trim().split(' ')
@@ -119,7 +120,7 @@ $(document).ready(function()
             }
             $('.to-type span').html(temp)
             $('.to-type p#1').css('background-color', '#0CC')
-            wordsToString()
+            toType = $('.to-type p#' + counter).html()
         }, 75)
     })
 })
