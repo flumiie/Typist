@@ -74,6 +74,7 @@ $(document).ready(function()
     {
         typedWord = $('#typing-box input').val().trim()
         typedChar = $('#typing-box input').val().trim().split('')
+        toType = $('.to-type p#' + counter).html()
 
         if(typedChar.length == 0)
         {
@@ -82,19 +83,15 @@ $(document).ready(function()
         }
         else
         {
-            for(var i = 0; i < typedChar.length; i++)
+            if(toType.match(typedWord))
             {
-                if(toType.match(typedWord))
-                {
-                    $('.to-type p#' + counter).css('background-color', '#0CC')
-                    $('#typing-box input').css('background-color', '')
-                }
-                else
-                {
-                    $('.to-type p#' + counter).css('background-color', '#E91E63')
-                    $('#typing-box input').css('background-color', '#E91E63')
-                    break
-                }
+                $('.to-type p#' + counter).css('background-color', '#0CC')
+                $('#typing-box input').css('background-color', '')
+            }
+            else
+            {
+                $('.to-type p#' + counter).css('background-color', '#E91E63')
+                $('#typing-box input').css('background-color', '#E91E63')
             }
         }
     })
