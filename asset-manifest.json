@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Typist/static/css/main.c7d4f490.chunk.css",
+    "main.css": "/Typist/static/css/main.75e12324.chunk.css",
     "main.js": "/Typist/static/js/main.c3e533db.chunk.js",
     "main.js.map": "/Typist/static/js/main.c3e533db.chunk.js.map",
     "runtime~main.js": "/Typist/static/js/runtime~main.95a67731.js",
@@ -8,8 +8,8 @@
     "static/js/2.cd5f1e34.chunk.js": "/Typist/static/js/2.cd5f1e34.chunk.js",
     "static/js/2.cd5f1e34.chunk.js.map": "/Typist/static/js/2.cd5f1e34.chunk.js.map",
     "index.html": "/Typist/index.html",
-    "precache-manifest.4306141c123f8aab10782ae6010f854f.js": "/Typist/precache-manifest.4306141c123f8aab10782ae6010f854f.js",
+    "precache-manifest.c201796ab7592a4f2ae8e01c5237077c.js": "/Typist/precache-manifest.c201796ab7592a4f2ae8e01c5237077c.js",
     "service-worker.js": "/Typist/service-worker.js",
-    "static/css/main.c7d4f490.chunk.css.map": "/Typist/static/css/main.c7d4f490.chunk.css.map"
+    "static/css/main.75e12324.chunk.css.map": "/Typist/static/css/main.75e12324.chunk.css.map"
   }
 }
