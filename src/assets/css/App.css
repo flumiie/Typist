@@ -24,6 +24,7 @@
 {
   margin-top: 15px
 }
+
 .typing-container { height: 3.5em }
 #typing-box
 {
@@ -36,6 +37,7 @@
 }
 #typing-box input
 {
+  font-size: 20px;
   border: none;
   width: 75%;
   height: 45px
@@ -58,6 +60,7 @@
   background-size: 100% 100%;
   color:white
 }
+
 .to-type
 {
   position: relative;
@@ -70,6 +73,12 @@
   display: inline-flex;
   margin: 0 auto
 }
+
+#redo
+{
+  font-size: 20px
+}
+
 .footer
 {
   position: absolute;
