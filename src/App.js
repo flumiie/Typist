@@ -83,6 +83,9 @@ export default class Main extends React.Component {
             </div>
           </div>
         </header>
+        <div class="footer">
+          Made by <a href="http://github.com/fralyx">fralyx</a> with ❤ in <a href="http://reactjs.org">React.JS</a>
+        </div>
       </div>
     );
   }

@@ -70,3 +70,10 @@
   display: inline-flex;
   margin: 0 auto
 }
+.footer
+{
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%)
+}
