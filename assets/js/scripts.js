@@ -2,26 +2,15 @@ var typedWord, typedChar, toType, lineCount = 1, counter = 1
 var correctWords = [], wrongWords = [], spl, temp = []
 var typedOncePerRedo = false, timerInterval = null, timer = 60
 
-function wordsToString()
-{
-    
-    // if(typedWord
-    //     toType.push($('.to-type p#' + counter).html())
-    // else
-    //     toType = toType.splice((counter-1), 1)
-}
-
 $(document).ready(function()
 {
     $('.timer').html(timer)
     $('#typing-box input').focus()
     spl = $('.to-type span').html().split(' ')
-    wordsToString()
 
     for(var i = 0; i < spl.length; i++)
-    {
         temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>' + ' ')
-    }
+
     $('.to-type span').html(temp)
     $('.to-type p#1').css('background-color', '#0CC')
     toType = $('.to-type p#' + counter).html()
@@ -32,7 +21,6 @@ $(document).ready(function()
         {
             $('#typing-box input').val('')
             toType = $('.to-type p#' + counter).html()
-            wordsToString()
 
             if(typedWord == ''){}
             else
@@ -60,12 +48,11 @@ $(document).ready(function()
             }
 
             // Shift paragraph up by one and generate new second line paragraph
+            // if($('.to-type p#' + counter+1).offset().top > $('.to-type p#' + lineCount).offset().top)
             if($('.to-type p#' + counter).offset().top > $('.to-type p#' + lineCount).offset().top)
             {
                 for(var i = lineCount; i < counter; i++)
-                {
                     $('.to-type p#' + i).remove()
-                }
                 lineCount = counter
             }
         }
@@ -127,9 +114,7 @@ $(document).ready(function()
             spl = $('.to-type span').html().split(' ')
             temp = []
             for(var i = 0; i < spl.length; i++)
-            {
                 temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>' + ' ')
-            }
             $('.to-type span').html(temp)
             $('.to-type p#1').css('background-color', '#0CC')
             toType = $('.to-type p#' + counter).html()
