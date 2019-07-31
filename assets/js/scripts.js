@@ -113,7 +113,8 @@ $(document).ready(function()
         timer = 60
         typedOncePerRedo = false
         $('.timer').html(timer)
-        startCalc()
+        clearInterval(timerInterval)
+        timerInterval = null
 
         // $('.to-type p').css(
         // {
