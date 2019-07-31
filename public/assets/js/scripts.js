@@ -1,6 +1,6 @@
-var typedWord, typedChar, toType, lineCount = 1, counter = 1
-var correctWords = [], wrongWords = [], spl, temp = []
-var typedOncePerRedo = false, timerInterval = null, timer = 60
+let typedWord, typedChar, toType, lineCount = 1, counter = 1
+let correctWords = [], wrongWords = [], userTyped = [], spl, temp = []
+let typedOncePerRedo = false, timerInterval = null, timer = 60
 
 $(document).ready(function()
 {
@@ -8,8 +8,8 @@ $(document).ready(function()
     $('#typing-box input').focus()
     spl = $('.to-type span').html().split(' ')
 
-    for(var i = 0; i < spl.length; i++)
-        temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>' + ' ')
+    for(let i = 0; i < spl.length; i++)
+        temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>')// + ' ')
 
     $('.to-type span').html(temp)
     $('.to-type p#1').css('background-color', '#0CC')
@@ -34,6 +34,7 @@ $(document).ready(function()
                         $('.to-type p#' + counter).css('background-color', '')
                         correctWords.push(toType)
                         wrongWords.push('')
+                        // userTyped.push(typedWord)
                     }
                     else
                     {
@@ -42,6 +43,19 @@ $(document).ready(function()
                         $('.to-type p#' + counter).css('background-color', '')
                         correctWords.push('')
                         wrongWords.push(toType)
+                        // userTyped.push(typedWord)
+                        // if(userTyped.length >= 8)
+                        // {
+                        //     for(let i = 0; i <= 7; i++)
+                        //     {
+                        //         if(toType == userTyped[i])
+                        //             break
+                        //         else if(i === 7)
+                        //         {
+                        //             $('#typing-box input').css({'background-color': '', 'text-align': 'center'}).val('Whoops, let\'s try that again').attr('disabled', true)
+                        //         }
+                        //     }
+                        // }
                     }
                     counter++
                 }
@@ -51,7 +65,7 @@ $(document).ready(function()
             // if($('.to-type p#' + counter+1).offset().top > $('.to-type p#' + lineCount).offset().top)
             if($('.to-type p#' + counter).offset().top > $('.to-type p#' + lineCount).offset().top)
             {
-                for(var i = lineCount; i < counter; i++)
+                for(let i = lineCount; i < counter; i++)
                     $('.to-type p#' + i).remove()
                 lineCount = counter
             }
@@ -91,21 +105,18 @@ $(document).ready(function()
 
     $('#typing-box button').on('click', function()
     {
-        $('.typing-container').css('height', '3.35em')
-        $('#typing-box input').removeAttr('disabled')
-
         correctWords = []
         wrongWords = []
+        userTyped = []
         counter = 1
-
-        typedOncePerRedo = false
         timer = 60
+        typedOncePerRedo = false
         $('.timer').html(timer)
         startCalc()
 
+        $('.typing-container').css('height', '3.35em')
         toType = $('.to-type p#' + counter).html()
-        $('#typing-box input').val('').css('background', 'white')
-        $('#typing-box input').focus()
+        $('#typing-box input').css('text-align', '').val('').removeAttr('disabled').css('background', 'white').focus()
         typedWord = $('#typing-box input').val().trim().split(' ')
         typedChar = $('#typing-box input').val().trim().split('')
 
@@ -113,8 +124,8 @@ $(document).ready(function()
         {
             spl = $('.to-type span').html().split(' ')
             temp = []
-            for(var i = 0; i < spl.length; i++)
-                temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>' + ' ')
+            for(let i = 0; i < spl.length; i++)
+                temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>')// + ' ')
             $('.to-type span').html(temp)
             $('.to-type p#1').css('background-color', '#0CC')
             toType = $('.to-type p#' + counter).html()
@@ -138,9 +149,10 @@ $(document).ready(function()
                 }
                 else
                 {
-                    $('.timer').html(0)
-                    $('.typing-container').css('height', '1em')
+                    timer = 0
+                    $('.timer').html(timer)
                     $('.to-type span p').remove()
+                    $('.typing-container').css('height', '1em')
                     $('#typing-box input').val('').attr('disabled', true)
                 }
             }, 1000)

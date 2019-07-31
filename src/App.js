@@ -65,7 +65,7 @@ export default class Main extends React.Component {
           <div className="whole-bag-of-jellybean">
             <div className="top-container">
               <div className="options">
-                Options
+                Typist
               </div>
               <div className="timer">0</div>
             </div>

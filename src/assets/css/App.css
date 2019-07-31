@@ -1,6 +1,7 @@
 *
 {
-  transition: all 0.2s ease
+  font-family: 'Inconsolata', monospace;
+  transition: background-color 0.2s ease, height 0.25s ease
 }
 .container
 {
@@ -27,7 +28,7 @@
 {
   display: inline-flex;
   width: 97%;
-  margin-top: 15px
+  margin: 15px auto 7px
 }
 .top-container .options,
 .top-container .timer
@@ -84,7 +85,8 @@
 .to-type span p
 {
   display: inline-flex;
-  margin: 0 auto
+  margin: -1.5px auto;
+  padding: 5px
 }
 
 #redo
