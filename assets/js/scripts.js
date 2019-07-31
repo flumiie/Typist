@@ -8,7 +8,7 @@ $(document).ready(function()
     $('#typing-box input').focus()
     spl = $('.to-type span').html().split(' ')
 
-    for(let i = 0; i < spl.length; i++)
+    for(var i = 0; i < spl.length; i++)
         temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>')// + ' ')
 
     $('.to-type span').html(temp)
@@ -46,7 +46,7 @@ $(document).ready(function()
                         // userTyped.push(typedWord)
                         // if(userTyped.length >= 8)
                         // {
-                        //     for(let i = 0; i <= 7; i++)
+                        //     for(var i = 0; i <= 7; i++)
                         //     {
                         //         if(toType == userTyped[i])
                         //             break
@@ -65,7 +65,7 @@ $(document).ready(function()
             // if($('.to-type p#' + counter+1).offset().top > $('.to-type p#' + lineCount).offset().top)
             if($('.to-type p#' + counter).offset().top > $('.to-type p#' + lineCount).offset().top)
             {
-                for(let i = lineCount; i < counter; i++)
+                for(var i = lineCount; i < counter; i++)
                     $('.to-type p#' + i).remove()
                 lineCount = counter
             }
@@ -124,7 +124,7 @@ $(document).ready(function()
         {
             spl = $('.to-type span').html().split(' ')
             temp = []
-            for(let i = 0; i < spl.length; i++)
+            for(var i = 0; i < spl.length; i++)
                 temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>')// + ' ')
             $('.to-type span').html(temp)
             $('.to-type p#1').css('background-color', '#0CC')
