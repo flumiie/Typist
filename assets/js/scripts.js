@@ -105,6 +105,7 @@ $(document).ready(function()
 
     $('#typing-box button').on('click', function()
     {
+        $(this).attr('disabled', true)
         correctWords = []
         wrongWords = []
         userTyped = []
@@ -113,6 +114,12 @@ $(document).ready(function()
         typedOncePerRedo = false
         $('.timer').html(timer)
         startCalc()
+
+        // $('.to-type p').css(
+        // {
+        //     'color': 'gray',
+        //     'background-color': 'gray'
+        // })
 
         $('.typing-container').css('height', '3.35em')
         toType = $('.to-type p#' + counter).html()
@@ -129,6 +136,7 @@ $(document).ready(function()
             $('.to-type span').html(temp)
             $('.to-type p#1').css('background-color', '#0CC')
             toType = $('.to-type p#' + counter).html()
+            $('#typing-box button').removeAttr('disabled')
         }, 75)
     })
 
