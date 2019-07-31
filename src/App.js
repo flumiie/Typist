@@ -67,7 +67,7 @@ export default class Main extends React.Component {
               <div className="options">
                 Typist
               </div>
-              <div className="timer">0</div>
+              <div className="timer"></div>
             </div>
             <div className="typing-container">
               <div className="to-type">

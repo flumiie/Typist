@@ -68,11 +68,11 @@
   background-size: 0% 100%;
   transition: background-size .25s ease-in, color .5s ease
 }
-/* #typing-box button:hover
+#typing-box button:hover
 {
   background-size: 100% 100%;
   color:white
-} */
+}
 
 .to-type
 {
