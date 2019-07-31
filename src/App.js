@@ -82,9 +82,8 @@ export default class Main extends React.Component {
             </div>
             <div id="typing-box">
               {/* <input type="text"/> */}
-              {/* <button id="redo" onClick={ this.wordRenderer }>↻</button> */}
               <input type="text" disabled placeholder="Still under maintenance, stay updated!" style={{textAlign:'center',textTransform:'uppercase'}}/>
-              <button id="redo" onClick={ this.wordRenderer } disabled>↻</button>
+              <button id="redo" onClick={ this.wordRenderer }>↻</button>
             </div>
           </div>
         </header>
