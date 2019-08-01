@@ -126,7 +126,6 @@ $(document).ready(function()
 
     $('#typing-box button').on('click', function()
     {
-        $(this).attr('disabled', true)
         $('.to-type span').css('opacity', '0')
 
         correctWords = []
@@ -151,8 +150,7 @@ $(document).ready(function()
 
         $('.typing-container').css('height', '3.35em')
         toType = $('.to-type p#' + counter).html()
-        // $('#typing-box input').css('text-align', '').removeAttr('disabled')
-        $('#typing-box input').val('').css('background', 'white').focus()
+        $('#typing-box input').css('text-align', '').removeAttr('disabled').val('').css('background', 'white').focus()
         typedWord = $('#typing-box input').val().trim().split(' ')
         typedChar = $('#typing-box input').val().trim().split('')
 
