@@ -99,7 +99,8 @@ function calculateResult()
     grossWPM = Math.round(grossWPM)
     netWPM = Math.round(netWPM)
 
-    $('.wpm-container span').html(netWPM)
+    $('#gross-wpm').html(grossWPM)
+    $('#net-wpm').html(netWPM)
 }
 
 function timerButtons()
