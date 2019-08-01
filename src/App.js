@@ -93,10 +93,13 @@ export default class Main extends React.Component
   timerCustom = () =>
   {
     this.timerButtonsReset()
+
     var custom = prompt('How many seconds?', '')
     while(custom == '' || isNaN(custom))
       custom = prompt('That\'s not a number, input seconds in number format', '')
+    custom = Math.round(custom)
     localStorage.setItem('timer', custom)
+    
     this.elm = document.getElementById('timer-custom')
     this.elm.style.background = 'orange'
     this.elm.style.color = 'white'
