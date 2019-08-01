@@ -1,9 +1,9 @@
 let typedWord, typedChar, toType, lineCount = 1, counter = 1
-let correctWords = [], wrongWords = [], userTyped = [], spl, temp = []
-let typedOncePerRedo = false, timerInterval = null, newLineInterval = null, timer = ''
+let correctWordList = [], wrongWordList = [], grossWords = [], userTyped = [], spl, temp = []
+let typedOncePerRedo = false, timerInterval = null, newLineInterval = null, timer = 0, res = 0
 var elm = ''
 
-function init()
+function initTimer()
 {
     var tCache = localStorage.getItem('timer')
     if(tCache == null || isNaN(tCache))
@@ -13,19 +13,160 @@ function init()
     }
     else
         timer = tCache
+    
 }
-init()
+initTimer()
+
+/**
+ * WPM Calculator
+ * Start calculate for each 1 second
+ */
+function startTimer()
+{
+    if(timerInterval == null)
+    {
+        timerInterval = setInterval(() =>
+        {
+            if(timer >= 2)
+            {
+                timer -= 1
+                $('.timer').html(timer)
+            }
+            else
+            {
+                clearInterval(timerInterval)
+                timerInterval = null
+                calculateResult()
+                timer = 0
+                $('.timer').html(timer)
+                $('.to-type span p').remove()
+                $('.typing-container').css('height', '1em')
+                $('#typing-box input').val('').attr('disabled', true)
+            }
+        }, 1000)
+    }
+    else
+    {
+        clearInterval(timerInterval)
+        timerInterval = null
+    }
+}
+
+// Shift paragraph up by one and generate new second line paragraph
+function shifter()
+{
+    if(newLineInterval == null)
+    {
+        setInterval(() =>
+        {
+            if(document.body.contains(document.querySelector('.to-type span p')))
+            {
+                if($('.to-type p#' + counter).offset().top > $('.to-type p#' + lineCount).offset().top)
+                {
+                    for(var i = lineCount; i < counter; i++) { $('.to-type p#' + i).remove() }
+                    lineCount = counter
+                }
+            }
+        }, 50)
+    }
+    else
+    {
+        clearInterval(newLineInterval)
+        newLineInterval = null
+    }
+}
+
+function calculateResult()
+{
+    let wrongWords = []
+    for(var i = 0; i < wrongWordList.length; i++)
+    {
+        if(wrongWordList[i] != '')
+            wrongWords.push(wrongWordList[i])
+    }
+    
+    let timer = localStorage.getItem('timer')
+    if(timer < 60)
+        var minute = (timer / 60)
+    else
+    {
+        var minute = (timer - timer % 60) / 60
+        var second = timer - minute
+    }
+
+    var grossWPM = (grossWords.join(' ').length / 5) / minute
+    var netWPM = grossWPM - (wrongWords.length / minute)
+    grossWPM = Math.round(grossWPM)
+    netWPM = Math.round(netWPM)
+
+    $('.wpm-container span').html(netWPM)
+}
 
 function timerButtons()
 {
     timer = localStorage.getItem('timer')
-    if(timer != 15 || timer != 30 || timer != 60 || timer != 120)
+    if(timer == 15)
+        elm = document.getElementById('timer-' + timer)
+    else if(timer == 30)
+        elm = document.getElementById('timer-' + timer)
+    else if(timer == 60)
+        elm = document.getElementById('timer-' + timer)
+    else if(timer == 120)
         elm = document.getElementById('timer-' + timer)
     else
         elm = document.getElementById('timer-custom')
 
     elm.style.background = 'orange'
     elm.style.color = 'white'
+}
+
+function resetAll()
+{
+    $('.to-type span').css('opacity', '0')
+
+    correctWordList = []
+    wrongWordList = []
+    grossWords = []
+    userTyped = []
+    lineCount = 1
+    counter = 1
+    timer = localStorage.getItem('timer')
+    typedOncePerRedo = false
+    $('.timer').html(timer)
+
+    clearInterval(timerInterval)
+    timerInterval = null
+    clearInterval(newLineInterval)
+    newLineInterval = null
+
+    // $('.to-type p').css(
+    // {
+    //     'color': 'gray',
+    //     'background-color': 'gray'
+    // })
+
+    $('.typing-container').css('height', '3.35em')
+    toType = $('.to-type p#' + counter).html()
+    $('#typing-box input').css('text-align', '').removeAttr('disabled').val('').css('background', 'white').focus()
+    typedWord = $('#typing-box input').val().trim().split(' ')
+    typedChar = $('#typing-box input').val().trim().split('')
+
+    setTimeout(() =>
+    {
+        $('.to-type span').css('opacity', '1')
+        spl = $('.to-type span').html().split(' ')
+        temp = []
+
+        for(var i = 0; i < spl.length; i++)
+        { temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>') }// + ' ')
+
+        $('.to-type span').html(temp)
+        $('.to-type p#1').css('background-color', '#0CC')
+        toType = $('.to-type p#' + counter).html()
+        $('#typing-box button').removeAttr('disabled')
+
+        shifter()
+    }, 50)
 }
 
 $(document).ready(function()
@@ -58,12 +199,13 @@ $(document).ready(function()
                 if(typedWord != undefined)
                 {
                     $('.to-type p#' + (counter+1)).css('background-color', '#0CC')
+                    grossWords.push(typedWord)
                     if(typedWord == $('.to-type p#' + counter).html())
                     {
                         $('.to-type p#' + counter).css('color', '#8BC34A')
                         $('.to-type p#' + counter).css('background-color', '')
-                        correctWords.push(toType)
-                        wrongWords.push('')
+                        correctWordList.push(toType)
+                        wrongWordList.push('')
                         // userTyped.push(typedWord)
                     }
                     else
@@ -71,8 +213,9 @@ $(document).ready(function()
                         $('.to-type p#' + counter).css('color', 'white')
                         $('.to-type p#' + counter).css('color', '#E91E63')
                         $('.to-type p#' + counter).css('background-color', '')
-                        correctWords.push('')
-                        wrongWords.push(toType)
+                        correctWordList.push('')
+                        wrongWordList.push(toType)
+
                         // userTyped.push(typedWord)
                         // if(userTyped.length >= 8)
                         // {
@@ -97,7 +240,7 @@ $(document).ready(function()
     {
         if(typedOncePerRedo == false)
         {
-            startCalc()
+            startTimer()
             typedOncePerRedo = true
         }
         typedWord = $('#typing-box input').val().trim()
@@ -124,53 +267,7 @@ $(document).ready(function()
         }
     })
 
-    $('#typing-box button').on('click', function()
-    {
-        $('.to-type span').css('opacity', '0')
-
-        correctWords = []
-        wrongWords = []
-        userTyped = []
-        lineCount = 1
-        counter = 1
-        timer = localStorage.getItem('timer')
-        typedOncePerRedo = false
-        $('.timer').html(timer)
-
-        clearInterval(timerInterval)
-        timerInterval = null
-        clearInterval(newLineInterval)
-        newLineInterval = null
-
-        // $('.to-type p').css(
-        // {
-        //     'color': 'gray',
-        //     'background-color': 'gray'
-        // })
-
-        $('.typing-container').css('height', '3.35em')
-        toType = $('.to-type p#' + counter).html()
-        $('#typing-box input').css('text-align', '').removeAttr('disabled').val('').css('background', 'white').focus()
-        typedWord = $('#typing-box input').val().trim().split(' ')
-        typedChar = $('#typing-box input').val().trim().split('')
-
-        setTimeout(() =>
-        {
-            $('.to-type span').css('opacity', '1')
-            spl = $('.to-type span').html().split(' ')
-            temp = []
-
-            for(var i = 0; i < spl.length; i++)
-            { temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>') }// + ' ')
-
-            $('.to-type span').html(temp)
-            $('.to-type p#1').css('background-color', '#0CC')
-            toType = $('.to-type p#' + counter).html()
-            $('#typing-box button').removeAttr('disabled')
-
-            shifter()
-        }, 50)
-    })
+    $('#typing-box button').on('click', function() { resetAll() })
 
     $('.timer').hover(function()
     {
@@ -197,68 +294,11 @@ $(document).ready(function()
     
     $('.timer-options button').on('click', function()
     {
-        clearInterval(timerInterval)
-        timerInterval = null
+        $('#typing-box button').click()
         setTimeout(() =>
         {
             timer = localStorage.getItem('timer')
             $('.timer').html(timer)
         }, 1)
     })
-
-    /**
-     * WPM Calculator
-     * Start calculate for each 1 second
-     */
-    function startCalc()
-    {
-        if(timerInterval == null)
-        {
-            timerInterval = setInterval(() =>
-            {
-                if(timer >= 2)
-                {
-                    timer -= 1
-                    $('.timer').html(timer)
-                }
-                else
-                {
-                    timer = 0
-                    $('.timer').html(timer)
-                    $('.to-type span p').remove()
-                    $('.typing-container').css('height', '1em')
-                    $('#typing-box input').val('').attr('disabled', true)
-                }
-            }, 1000)
-        }
-        else
-        {
-            clearInterval(timerInterval)
-            timerInterval = null
-        }
-    }
-
-    // Shift paragraph up by one and generate new second line paragraph
-    function shifter()
-    {
-        if(newLineInterval == null)
-        {
-            setInterval(() =>
-            {
-                if(document.body.contains(document.querySelector('.to-type span p')))
-                {
-                    if($('.to-type p#' + counter).offset().top > $('.to-type p#' + lineCount).offset().top)
-                    {
-                        for(var i = lineCount; i < counter; i++) { $('.to-type p#' + i).remove() }
-                        lineCount = counter
-                    }
-                }
-            }, 50)
-        }
-        else
-        {
-            clearInterval(newLineInterval)
-            newLineInterval = null
-        }
-    }
 })
