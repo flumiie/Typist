@@ -162,7 +162,7 @@ export default class Main extends React.Component
               {/* <input type="text" disabled placeholder="Still under maintenance, stay updated!" style={{textAlign:'center',textTransform:'uppercase'}}/> */}
               <button id="redo" onClick={ this.wordRenderer }>↻</button>
             </div>
-            <div className="wpm-container">WPM: <span></span></div>
+            <div className="wpm-container">Gross WPM: <span id="gross-wpm"></span> | WPM: <span id="net-wpm"></span></div>
           </div>
           {/* <div className="hidden-elements"></div> */}
         </header>

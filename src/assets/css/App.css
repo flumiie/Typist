@@ -131,7 +131,8 @@
 
 .wpm-container
 {
-  margin: 0 50px 7px 0;
+  width: 300px;
+  margin: 0 7px 7px 0;
   float: right
 }
 
