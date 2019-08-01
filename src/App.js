@@ -94,7 +94,7 @@ export default class Main extends React.Component
   {
     this.timerButtonsReset()
     var custom = prompt('How many seconds?', '')
-    while(isNaN(custom))
+    while(custom == '' || isNaN(custom))
       custom = prompt('That\'s not a number, input seconds in number format', '')
     localStorage.setItem('timer', custom)
     this.elm = document.getElementById('timer-custom')
