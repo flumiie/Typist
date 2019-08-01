@@ -131,7 +131,7 @@ export default class Main extends React.Component
         <header className="header">
           <div className="whole-bag-of-jellybean">
             <div className="top-container">
-              <div className="options">
+              <div className="title">
                 Typist
               </div>
               <div className="timer-container">
@@ -140,10 +140,14 @@ export default class Main extends React.Component
                   <button id="timer-30" onClick={ this.timer30sec }>30</button>&nbsp;
                   <button id="timer-60" onClick={ this.timer60sec }>60</button>&nbsp;
                   <button id="timer-120" onClick={ this.timer2min }>120</button>&nbsp;
-                  <button id="timer-custom" onClick={ this.timerCustom }>Custom</button>
+                  {/* <button id="timer-custom" onClick={ this.timerCustom }>Custom</button> */}
                 </div>
                 &nbsp;
-                <div className="timer"></div>
+                <div className="timer">
+                  <p id="1"></p>
+                  <p id="2"></p>
+                  <p id="3"></p>
+                </div>
               </div>
             </div>
             <div className="typing-container">
@@ -162,7 +166,10 @@ export default class Main extends React.Component
               {/* <input type="text" disabled placeholder="Still under maintenance, stay updated!" style={{textAlign:'center',textTransform:'uppercase'}}/> */}
               <button id="redo" onClick={ this.wordRenderer }>↻</button>
             </div>
-            <div className="wpm-container">Gross WPM: <span id="gross-wpm"></span> | WPM: <span id="net-wpm"></span></div>
+            <div className="bottom-row-container">
+              <div className="options"><img src="assets/img/settings.svg" width="25px" alt=""/></div>
+              <div className="wpm-container">Gross WPM: <span id="gross-wpm"></span> | WPM: <span id="net-wpm"></span></div>
+            </div>
           </div>
           {/* <div className="hidden-elements"></div> */}
         </header>

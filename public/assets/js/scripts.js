@@ -17,6 +17,21 @@ function initTimer()
 }
 initTimer()
 
+function digitalTimer()
+{
+    let clock = timer.toString().split('')
+    let telm = ''
+    let clen = clock.length
+
+    for(var i = 0; i < clock.length; i++)
+    {
+        if(clen > clock.length)
+        telm = '.timer p#' + (i+1).toString()
+        if($(telm).html().toString() != clock[i] && clock[i] != undefined)
+            $(telm).html(clock[i])
+    }
+}
+
 /**
  * WPM Calculator
  * Start calculate for each 1 second
@@ -30,7 +45,7 @@ function startTimer()
             if(timer >= 2)
             {
                 timer -= 1
-                $('.timer').html(timer)
+                digitalTimer()
             }
             else
             {
@@ -38,7 +53,7 @@ function startTimer()
                 timerInterval = null
                 calculateResult()
                 timer = 0
-                $('.timer').html(timer)
+                digitalTimer()
                 $('.to-type span p').remove()
                 $('.typing-container').css('height', '1em')
                 $('#typing-box input').val('').attr('disabled', true)
@@ -133,7 +148,7 @@ function resetAll()
     counter = 1
     timer = localStorage.getItem('timer')
     typedOncePerRedo = false
-    $('.timer').html(timer)
+    digitalTimer()
 
     clearInterval(timerInterval)
     timerInterval = null
@@ -172,7 +187,7 @@ function resetAll()
 
 $(document).ready(function()
 {
-    $('.timer').html(timer)
+    digitalTimer()
     timerButtons()
 
     $('#typing-box input').focus()
@@ -274,9 +289,9 @@ $(document).ready(function()
     {
         $('.timer-options').css(
         {
-            'position': 'initial',
-            'top': '',
-            'margin-top': '-3px',
+            // 'position': 'initial',
+            // 'top': '',
+            // 'margin-top': '-3px',
             'opacity': 1
         })
     }, function()
@@ -285,9 +300,9 @@ $(document).ready(function()
         {
             $('.timer-options').css(
             {
-                'position': 'absolute',
-                'top': '-10vh',
-                'margin-top': '',
+                // 'position': 'initial',
+                // 'top': '-10vh',
+                // 'margin-top': '',
                 'opacity': 0
             })
         })
@@ -299,7 +314,7 @@ $(document).ready(function()
         setTimeout(() =>
         {
             timer = localStorage.getItem('timer')
-            $('.timer').html(timer)
+            digitalTimer()
         }, 1)
     })
 })

@@ -1,3 +1,9 @@
+@font-face
+{
+  font-family: DSDigital;
+  src: url(../fonts/DS-DIGI.TTF);
+}
+
 *
 {
   font-family: 'Inconsolata', monospace;
@@ -41,16 +47,22 @@
   justify-content: space-between;
   margin: 15px auto 7px
 }
-.top-container .options { display: flex }
+.top-container .title { display: flex }
 .top-container .timer-container { display: inline-flex }
 
-.timer { margin: 0 0 0 auto }
+.timer { width: 50px }
+.timer p
+{
+  display: inline-flex;
+  font-family: 'DSDigital';
+  margin: 0 0 0 auto
+}
 .timer-options
 {
-  position: absolute;
+  position: initial;
+  margin-top: -7px;
   width: 100%;
-  height: 7px;
-  top: -10vh;
+  height: 10px;
   opacity: 0;
 }
 .timer-options button
@@ -129,12 +141,16 @@
   font-size: 20px
 }
 
+.bottom-row-container
+{
+  display: inline-flex;
+  width: 97%;
+  margin-bottom: 7px;
+  justify-content: space-between
+}
 .wpm-container
 {
   font-size: 26px;
-  width: 300px;
-  margin: 0 7px 7px 0;
-  float: right
 }
 
 .footer
