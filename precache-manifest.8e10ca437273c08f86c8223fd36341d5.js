@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "72295b98f1c912c8d179a1380b0269ff",
+    "revision": "b99b93db331d5ca729f3f032667c99a5",
     "url": "/Typist/index.html"
   },
   {
-    "revision": "c1b963e288b283aa99d0",
+    "revision": "4f6b5321460273d8ada5",
     "url": "/Typist/static/css/main.c453b068.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Typist/static/js/2.cd5f1e34.chunk.js"
   },
   {
-    "revision": "c1b963e288b283aa99d0",
-    "url": "/Typist/static/js/main.e2f0be0c.chunk.js"
+    "revision": "4f6b5321460273d8ada5",
+    "url": "/Typist/static/js/main.24ca4951.chunk.js"
   },
   {
     "revision": "404ce31e8a30b6abcd19",
