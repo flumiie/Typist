@@ -129,6 +129,12 @@
   font-size: 20px
 }
 
+.wpm-container
+{
+  margin: 0 50px 7px 0;
+  float: right
+}
+
 .footer
 {
   position: absolute;

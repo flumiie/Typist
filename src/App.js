@@ -95,11 +95,11 @@ export default class Main extends React.Component
     this.timerButtonsReset()
 
     var custom = prompt('How many seconds?', '')
-    while(custom == '' || isNaN(custom))
+    while(custom === '' || isNaN(custom))
       custom = prompt('That\'s not a number, input seconds in number format', '')
     custom = Math.round(custom)
     localStorage.setItem('timer', custom)
-    
+
     this.elm = document.getElementById('timer-custom')
     this.elm.style.background = 'orange'
     this.elm.style.color = 'white'
@@ -162,6 +162,7 @@ export default class Main extends React.Component
               {/* <input type="text" disabled placeholder="Still under maintenance, stay updated!" style={{textAlign:'center',textTransform:'uppercase'}}/> */}
               <button id="redo" onClick={ this.wordRenderer }>↻</button>
             </div>
+            <div className="wpm-container">WPM: <span></span></div>
           </div>
           {/* <div className="hidden-elements"></div> */}
         </header>
