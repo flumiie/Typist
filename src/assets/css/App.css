@@ -24,19 +24,47 @@
   width: 55%;
   background: gray
 }
+/* .hidden-elements
+{
+  position: absolute;
+  height: 100%;
+  width: 22.5%;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  background: red;
+} */
 .top-container
 {
   display: inline-flex;
   width: 97%;
+  justify-content: space-between;
   margin: 15px auto 7px
 }
-.top-container .options,
-.top-container .timer
+.top-container .options { display: flex }
+.top-container .timer-container { display: inline-flex }
+
+.timer { margin: 0 0 0 auto }
+.timer-options
 {
-  display: flex;
-  width: 50%
+  position: absolute;
+  width: 100%;
+  top: -10vh;
+  opacity: 0;
 }
-.top-container .timer { flex-direction: row-reverse }
+.timer-options button
+{
+  padding: 7px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background: rgb(156, 144, 120)
+}
+.timer-options button:hover
+{
+  color: white;
+  background: orange
+}
 
 .typing-container { height: 3.35em }
 #typing-box
