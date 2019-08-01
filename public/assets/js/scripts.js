@@ -9,11 +9,21 @@ $(document).ready(function()
     spl = $('.to-type span').html().split(' ')
 
     for(var i = 0; i < spl.length; i++)
-        temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>')// + ' ')
+    { temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>') }// + ' ')
 
     $('.to-type span').html(temp)
     $('.to-type p#1').css('background-color', '#0CC')
     toType = $('.to-type p#' + counter).html()
+
+    setInterval(() =>
+    {
+        // Shift paragraph up by one and generate new second line paragraph
+        if($('.to-type p#' + counter).offset().top > $('.to-type p#' + lineCount).offset().top)
+        {
+            for(var i = lineCount; i < counter; i++) { $('.to-type p#' + i).remove() }
+            lineCount = counter
+        }
+    }, 50)
 
     $('#typing-box input').keypress(function()
     {
@@ -60,15 +70,6 @@ $(document).ready(function()
                     counter++
                 }
             }
-
-            // Shift paragraph up by one and generate new second line paragraph
-            // if($('.to-type p#' + counter+1).offset().top > $('.to-type p#' + lineCount).offset().top)
-            if($('.to-type p#' + counter).offset().top > $('.to-type p#' + lineCount).offset().top)
-            {
-                for(var i = lineCount; i < counter; i++)
-                    $('.to-type p#' + i).remove()
-                lineCount = counter
-            }
         }
     })
 
@@ -106,9 +107,12 @@ $(document).ready(function()
     $('#typing-box button').on('click', function()
     {
         $(this).attr('disabled', true)
+        $('.to-type span').css('opacity', '0')
+
         correctWords = []
         wrongWords = []
         userTyped = []
+        lineCount = 1
         counter = 1
         timer = 60
         typedOncePerRedo = false
@@ -129,12 +133,13 @@ $(document).ready(function()
         typedWord = $('#typing-box input').val().trim().split(' ')
         typedChar = $('#typing-box input').val().trim().split('')
 
-        setTimeout(function()
+        setTimeout(() =>
         {
+            $('.to-type span').css('opacity', '1')
             spl = $('.to-type span').html().split(' ')
             temp = []
             for(var i = 0; i < spl.length; i++)
-                temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>')// + ' ')
+            { temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>') }// + ' ')
             $('.to-type span').html(temp)
             $('.to-type p#1').css('background-color', '#0CC')
             toType = $('.to-type p#' + counter).html()
@@ -150,7 +155,7 @@ $(document).ready(function()
     {
         if(timerInterval == null)
         {
-            timerInterval = setInterval(function()
+            timerInterval = setInterval(() =>
             {
                 if(timer >= 2)
                 {
