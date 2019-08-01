@@ -1,6 +1,16 @@
 let typedWord, typedChar, toType, lineCount = 1, counter = 1
 let correctWords = [], wrongWords = [], userTyped = [], spl, temp = []
-let typedOncePerRedo = false, timerInterval = null, timer = 60
+let typedOncePerRedo = false, timerInterval = null, newLineInterval = null, timer = ''
+
+if(localStorage.getItem('timer') == null)
+{
+    timer = 60
+    localStorage.setItem('timer', timer)
+}
+else
+{
+    timer = localStorage.getItem('timer')
+}
 
 $(document).ready(function()
 {
@@ -15,15 +25,7 @@ $(document).ready(function()
     $('.to-type p#1').css('background-color', '#0CC')
     toType = $('.to-type p#' + counter).html()
 
-    setInterval(() =>
-    {
-        // Shift paragraph up by one and generate new second line paragraph
-        if($('.to-type p#' + counter).offset().top > $('.to-type p#' + lineCount).offset().top)
-        {
-            for(var i = lineCount; i < counter; i++) { $('.to-type p#' + i).remove() }
-            lineCount = counter
-        }
-    }, 50)
+    newLineInterval = shifter()
 
     $('#typing-box input').keypress(function()
     {
@@ -114,11 +116,14 @@ $(document).ready(function()
         userTyped = []
         lineCount = 1
         counter = 1
-        timer = 60
+        timer = localStorage.getItem('timer')
         typedOncePerRedo = false
         $('.timer').html(timer)
+
         clearInterval(timerInterval)
         timerInterval = null
+        clearInterval(newLineInterval)
+        newLineInterval = null
 
         // $('.to-type p').css(
         // {
@@ -138,13 +143,51 @@ $(document).ready(function()
             $('.to-type span').css('opacity', '1')
             spl = $('.to-type span').html().split(' ')
             temp = []
+
             for(var i = 0; i < spl.length; i++)
             { temp.push('<p id="' + (i+1) + '">' + spl[i] + '</p>') }// + ' ')
+
             $('.to-type span').html(temp)
             $('.to-type p#1').css('background-color', '#0CC')
             toType = $('.to-type p#' + counter).html()
             $('#typing-box button').removeAttr('disabled')
-        }, 75)
+
+            shifter()
+        }, 50)
+    })
+
+    $('.timer').hover(function()
+    {
+        $('.timer-options').css(
+        {
+            'position': 'initial',
+            'top': '',
+            'margin-top': '-3px',
+            'opacity': 1
+        })
+    }, function()
+    {
+        $('.timer-container').on('mouseleave', function()
+        {
+            $('.timer-options').css(
+            {
+                'position': 'absolute',
+                'top': '-10vh',
+                'margin-top': '',
+                'opacity': 0
+            })
+        })
+    })
+    
+    $('.timer-options button').on('click', function()
+    {
+        clearInterval(timerInterval)
+        timerInterval = null
+        setTimeout(() =>
+        {
+            timer = localStorage.getItem('timer')
+            $('.timer').html(timer)
+        }, 1)
     })
 
     /**
@@ -176,6 +219,30 @@ $(document).ready(function()
         {
             clearInterval(timerInterval)
             timerInterval = null
+        }
+    }
+
+    // Shift paragraph up by one and generate new second line paragraph
+    function shifter()
+    {
+        if(newLineInterval == null)
+        {
+            setInterval(() =>
+            {
+                if(document.body.contains(document.querySelector('.to-type span p')))
+                {
+                    if($('.to-type p#' + counter).offset().top > $('.to-type p#' + lineCount).offset().top)
+                    {
+                        for(var i = lineCount; i < counter; i++) { $('.to-type p#' + i).remove() }
+                        lineCount = counter
+                    }
+                }
+            }, 50)
+        }
+        else
+        {
+            clearInterval(newLineInterval)
+            newLineInterval = null
         }
     }
 })
