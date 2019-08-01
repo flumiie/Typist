@@ -1,20 +1,38 @@
 let typedWord, typedChar, toType, lineCount = 1, counter = 1
 let correctWords = [], wrongWords = [], userTyped = [], spl, temp = []
 let typedOncePerRedo = false, timerInterval = null, newLineInterval = null, timer = ''
+var elm = ''
 
-if(localStorage.getItem('timer') == null)
+function init()
 {
-    timer = 60
-    localStorage.setItem('timer', timer)
+    var tCache = localStorage.getItem('timer')
+    if(tCache == null || isNaN(tCache))
+    {
+        timer = 60
+        localStorage.setItem('timer', timer)
+    }
+    else
+        timer = tCache
 }
-else
+init()
+
+function timerButtons()
 {
     timer = localStorage.getItem('timer')
+    if(timer != 15 || timer != 30 || timer != 60 || timer != 120)
+        elm = document.getElementById('timer-' + timer)
+    else
+        elm = document.getElementById('timer-custom')
+
+    elm.style.background = 'orange'
+    elm.style.color = 'white'
 }
 
 $(document).ready(function()
 {
     $('.timer').html(timer)
+    timerButtons()
+
     $('#typing-box input').focus()
     spl = $('.to-type span').html().split(' ')
 
