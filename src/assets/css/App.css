@@ -50,12 +50,22 @@
 .top-container .title { display: flex }
 .top-container .timer-container { display: inline-flex }
 
-.timer { width: 50px }
+.timer { width: 75px }
 .timer p
 {
+  position: absolute;
   display: inline-flex;
   font-family: 'DSDigital';
   margin: 0 0 0 auto
+}
+.timer p:nth-child(1) { right: 25% }
+.timer p:nth-child(2) { right: 24.3% }
+.timer p:nth-child(3) { right: 23.6% }
+@media (width: 1366px)
+{
+  .timer p:nth-child(1) { right: 25.5% }
+  .timer p:nth-child(2) { right: 24.55% }
+  .timer p:nth-child(3) { right: 23.6% }
 }
 .timer-options
 {

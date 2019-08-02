@@ -2,6 +2,7 @@ let typedWord, typedChar, toType, lineCount = 1, counter = 1
 let correctWordList = [], wrongWordList = [], grossWords = [], userTyped = [], spl, temp = []
 let typedOncePerRedo = false, timerInterval = null, newLineInterval = null, timer = 0, res = 0
 var elm = ''
+var clen = timer.toString().split('').length
 
 function initTimer()
 {
@@ -20,15 +21,18 @@ initTimer()
 function digitalTimer()
 {
     let clock = timer.toString().split('')
-    let telm = ''
-    let clen = clock.length
+    var telm = ''
 
     for(var i = 0; i < clock.length; i++)
     {
-        if(clen > clock.length)
         telm = '.timer p#' + (i+1).toString()
         if($(telm).html().toString() != clock[i] && clock[i] != undefined)
             $(telm).html(clock[i])
+        if(clen > clock.length)
+        {
+            $('.timer p#' + clen).css('display', ' none')
+            clen -= 1
+        }
     }
 }
 
@@ -147,6 +151,7 @@ function resetAll()
     lineCount = 1
     counter = 1
     timer = localStorage.getItem('timer')
+    clen = timer.toString().split('').length
     typedOncePerRedo = false
     digitalTimer()
 

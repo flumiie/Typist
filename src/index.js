@@ -4,9 +4,22 @@ import './assets/css/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { AppContainer } from 'react-hot-loader';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const render = () => {
+    ReactDOM.render(
+        // Wrap App inside AppContainer
+        <AppContainer>
+        <App />
+        </AppContainer>,
+        document.getElementById('root')
+    );
+};
+serviceWorker.register();
+render();
+
+if (module.hot) {
+    module.hot.accept('./App', () => {
+        render();
+    });
+}
