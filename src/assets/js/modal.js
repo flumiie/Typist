@@ -59,6 +59,18 @@ class Modal extends Component
         }
     }
 
+    showMessage = () =>
+    {
+        if($('.options-innerds .message').css('opacity') === '0')
+        {
+            document.querySelector('.options-innerds .message').style.animation = 'showMessage 0.25s normal forwards ease'
+            setTimeout(() =>
+            {
+                document.querySelector('.options-innerds .message').style.animation = 'hideMessage 0.25s normal forwards ease'
+            }, 3000)
+        }
+    }
+
     timer15sec = () =>
     {
         this.resetTimerButtons()
@@ -66,6 +78,8 @@ class Modal extends Component
         this.timerElm = document.getElementById('timer-15')
         this.timerElm.style.background = 'orange'
         this.timerElm.style.color = 'white'
+
+        this.showMessage()
     }
 
     timer30sec = () =>
@@ -75,6 +89,8 @@ class Modal extends Component
         this.timerElm = document.getElementById('timer-30')
         this.timerElm.style.background = 'orange'
         this.timerElm.style.color = 'white'
+
+        this.showMessage()
     }
 
     timer60sec = () =>
@@ -84,6 +100,8 @@ class Modal extends Component
         this.timerElm = document.getElementById('timer-60')
         this.timerElm.style.background = 'orange'
         this.timerElm.style.color = 'white'
+
+        this.showMessage()
     }
 
     timer2min = () =>
@@ -93,6 +111,8 @@ class Modal extends Component
         this.timerElm = document.getElementById('timer-120')
         this.timerElm.style.background = 'orange'
         this.timerElm.style.color = 'white'
+
+        this.showMessage()
     }
 
     diffEasy = () =>
@@ -109,6 +129,8 @@ class Modal extends Component
             this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 3, max: 4, maxLength: 4, join: ' ' })
             localStorage.setItem('Generated Words', this.gens)
         }
+
+        this.showMessage()
     }
 
     diffMedium = () =>
@@ -125,6 +147,8 @@ class Modal extends Component
             this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 5, max: 6, maxLength: 6, join: ' ' })
             localStorage.setItem('Generated Words', this.gens)
         }
+
+        this.showMessage()
     }
 
     diffHard = () =>
@@ -141,6 +165,8 @@ class Modal extends Component
             this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 6, max: 8, maxLength: 8, join: ' ' })
             localStorage.setItem('Generated Words', this.gens)
         }
+
+        this.showMessage()
     }
 
     diffExpert = () =>
@@ -157,6 +183,8 @@ class Modal extends Component
             this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 8, max: 10, maxLength: 10, join: ' ' })
             localStorage.setItem('Generated Words', this.gens)
         }
+
+        this.showMessage()
     }
 
     // timerCustom = () =>

@@ -81,6 +81,7 @@ export default class Main extends Component
 
     return (
       <div className="container">
+
         <div className="options-modal">
           <div className="options-innerds">
             <div className="options-title">
@@ -105,6 +106,7 @@ export default class Main extends Component
                 {/* <button id="timer-custom" onClick={ this.timerCustom }>Custom</button> */}
               </div>
             </div>
+            <div className="message">The timer has been reset</div>
           </div>
         </div>
 

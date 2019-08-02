@@ -15,12 +15,21 @@
 }
 .options-innerds
 {
+    position: relative;
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 60%;
     height: 60%
+}
+.options-innerds .message
+{
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    width: 100%;
+    opacity: 0
 }
 .options-title
 {
@@ -71,6 +80,16 @@
     100% { opacity: 1 }
 }
 @keyframes hideModal
+{
+    0% { opacity: 1 }
+    100% { opacity: 0 }
+}
+@keyframes showMessage
+{
+    0% { opacity: 0 }
+    100% { opacity: 1 }
+}
+@keyframes hideMessage
 {
     0% { opacity: 1 }
     100% { opacity: 0 }
