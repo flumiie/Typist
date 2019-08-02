@@ -14,8 +14,11 @@ class Modal extends Component
         this.gens = ''
         this.timerElm = ''
         this.diffElm = ''
+    }
 
-        if(localStorage.getItem('Generated Words') == null)
+    componentDidMount()
+    {
+        if(localStorage.getItem('Generated Words') === null)
             this.diffEasy()
     }
 
