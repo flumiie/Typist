@@ -1,30 +1,43 @@
-import React from 'react'
+import React, { Component } from 'react'
 import $ from 'jquery'
+// import WordAnim from 'react-random-word';
 // import logo from './logo.svg';
 // import './assets/js/scripts'
+import modal from './assets/js/modal'
+
 import './assets/css/App.css'
-// import WordAnim from 'react-random-word';
 
 var randomWord = require('random-words')
 
-export default class Main extends React.Component
+export default class Main extends Component
 {
   constructor(props)
   {
     super(props)
-    this.wordRenderer = this.wordRenderer.bind(this)
-
+    
     this.cnt = 1
     this.type = ''
+    this.diff = 0
     this.gens = ''
-    this.totalWordsPerMinute = 400
-
+    this.totalWordsPerMinute = 500
     this.elm = ''
 
-    this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 1, max: 9, join: ' ' })
+    if(localStorage.getItem('Difficulty') == null)
+    {
+      this.diff = [3, 4]
+      localStorage.setItem('Difficulty', this.diff)
+    }
+    else
+      this.diff = localStorage.getItem('Difficulty').split(',')
+    
+    this.cacheGens = localStorage.getItem('Generated Words')
+    this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: this.diff[0], max: this.diff[1], maxLength: this.diff[1], join: ' ' })
+
     this.state = {
       generator: this.gens
     }
+
+    this.wordRenderer = this.wordRenderer.bind(this)
   }
 
   componentDidMount()
@@ -40,70 +53,10 @@ export default class Main extends React.Component
   
   wordRenderer = () =>
   {
-    this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 1, max: 9, join: ' ' })
+    this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 1, max: this.diff, maxLength: this.diff, join: ' ' })
     this.setState({ generator: this.gens })
   }
-
-  timerButtonsReset = () =>
-  {
-    var tb = document.querySelectorAll('.timer-options button')
-    for(var i = 0; i < tb.length; i++)
-    {
-      tb[i].style.background = 'rgb(156, 144, 120)'
-      tb[i].style.color = 'black'
-    }
-  }
-
-  timer15sec = () =>
-  {
-    this.timerButtonsReset()
-    localStorage.setItem('timer', 15)
-    this.elm = document.getElementById('timer-15')
-    this.elm.style.background = 'orange'
-    this.elm.style.color = 'white'
-  }
-
-  timer30sec = () =>
-  {
-    this.timerButtonsReset()
-    localStorage.setItem('timer', 30)
-    this.elm = document.getElementById('timer-30')
-    this.elm.style.background = 'orange'
-    this.elm.style.color = 'white'
-  }
-
-  timer60sec = () =>
-  {
-    this.timerButtonsReset()
-    localStorage.setItem('timer', 60)
-    this.elm = document.getElementById('timer-60')
-    this.elm.style.background = 'orange'
-    this.elm.style.color = 'white'
-  }
-
-  timer2min = () =>
-  {
-    this.timerButtonsReset()
-    localStorage.setItem('timer', 120)
-    this.elm = document.getElementById('timer-120')
-    this.elm.style.background = 'orange'
-    this.elm.style.color = 'white'
-  }
-
-  timerCustom = () =>
-  {
-    this.timerButtonsReset()
-
-    var custom = prompt('How many seconds?', '')
-    while(custom === '' || isNaN(custom))
-      custom = prompt('That\'s not a number, input seconds in number format', '')
-    custom = Math.round(custom)
-    localStorage.setItem('timer', custom)
-
-    this.elm = document.getElementById('timer-custom')
-    this.elm.style.background = 'orange'
-    this.elm.style.color = 'white'
-  }
+  
 
   render() {
     $(document).ready(function()
@@ -121,13 +74,40 @@ export default class Main extends React.Component
         if($('.to-type p').length < 14)
         {
           if(event.which === 32 || event.keyCode === 32)
-            this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 1, max: 9, join: ' ' })
+            this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 1, max: this.diff, maxLength: this.diff, join: ' ' })
         }
       })
     })
 
     return (
       <div className="container">
+        <div className="options-modal">
+          <div className="options-innerds">
+            <div className="options-title">
+              <h2>Settings</h2>
+              <span className="close" onClick={ modal.closeModal }>&times;</span>
+            </div>
+            <div className="options-content">
+              <div className="timer-options">
+                <h3>Timer:</h3>
+                <button id="timer-15" onClick={ modal.timer15sec }>15</button>&nbsp;
+                <button id="timer-30" onClick={ modal.timer30sec }>30</button>&nbsp;
+                <button id="timer-60" onClick={ modal.timer60sec }>60</button>&nbsp;
+                <button id="timer-120" onClick={ modal.timer2min }>120</button>&nbsp;
+                {/* <button id="timer-custom" onClick={ this.timerCustom }>Custom</button> */}
+              </div>
+              <div className="difficulty-options">
+                <h3>Difficulty:</h3>
+                <button id="diff-easy" onClick={ modal.diffEasy }>Easy</button>&nbsp;
+                <button id="diff-medium" onClick={ modal.diffMedium }>Medium</button>&nbsp;
+                <button id="diff-hard" onClick={ modal.diffHard }>Hard</button>&nbsp;
+                <button id="diff-expert" onClick={ modal.diffExpert }>Expert</button>&nbsp;
+                {/* <button id="timer-custom" onClick={ this.timerCustom }>Custom</button> */}
+              </div>
+            </div>
+          </div>
+        </div>
+
         <header className="header">
           <div className="whole-bag-of-jellybean">
             <div className="top-container">
@@ -135,14 +115,6 @@ export default class Main extends React.Component
                 Typist
               </div>
               <div className="timer-container">
-                <div className="timer-options">
-                  <button id="timer-15" onClick={ this.timer15sec }>15</button>&nbsp;
-                  <button id="timer-30" onClick={ this.timer30sec }>30</button>&nbsp;
-                  <button id="timer-60" onClick={ this.timer60sec }>60</button>&nbsp;
-                  <button id="timer-120" onClick={ this.timer2min }>120</button>&nbsp;
-                  {/* <button id="timer-custom" onClick={ this.timerCustom }>Custom</button> */}
-                </div>
-                &nbsp;
                 <div className="timer">
                   <p id="1"></p>
                   <p id="2"></p>
@@ -167,7 +139,9 @@ export default class Main extends React.Component
               <button id="redo" onClick={ this.wordRenderer }>↻</button>
             </div>
             <div className="bottom-row-container">
-              <div className="options"><img src="assets/img/settings.svg" width="25px" alt=""/></div>
+              <div className="options" onClick={ modal.openModal }>
+                <img src="assets/img/settings.svg" width="25px" alt=""/>
+              </div>
               <div className="wpm-container">Gross WPM: <span id="gross-wpm"></span> | WPM: <span id="net-wpm"></span></div>
             </div>
           </div>

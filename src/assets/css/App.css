@@ -67,27 +67,6 @@
   .timer p:nth-child(2) { right: 24.55% }
   .timer p:nth-child(3) { right: 23.6% }
 }
-.timer-options
-{
-  position: initial;
-  margin-top: -7px;
-  width: 100%;
-  height: 10px;
-  opacity: 0;
-}
-.timer-options button
-{
-  padding: 7px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  background: rgb(156, 144, 120)
-}
-.timer-options button:hover
-{
-  color: white;
-  background: orange
-}
 
 .typing-container { height: 3.35em }
 #typing-box

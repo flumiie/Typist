@@ -61,6 +61,8 @@ function calc()
 
     $('#gross-wpm').html(grossWPM)
     $('#net-wpm').html(netWPM)
+
+    // if(grossWPM == 0)
 }
 
 /**
@@ -299,31 +301,18 @@ $(document).ready(function()
     })
 
     $('#typing-box button').on('click', function() { resetAll() })
-
-    $('.timer').hover(function()
-    {
-        $('.timer-options').css(
-        {
-            // 'position': 'initial',
-            // 'top': '',
-            // 'margin-top': '-3px',
-            'opacity': 1
-        })
-    }, function()
-    {
-        $('.timer-container').on('mouseleave', function()
-        {
-            $('.timer-options').css(
-            {
-                // 'position': 'initial',
-                // 'top': '-10vh',
-                // 'margin-top': '',
-                'opacity': 0
-            })
-        })
-    })
     
     $('.timer-options button').on('click', function()
+    {
+        $('#typing-box button').click()
+        setTimeout(() =>
+        {
+            timer = localStorage.getItem('timer')
+            digitalTimer()
+        }, 1)
+    })
+
+    $('.difficulty-options').on('click', function()
     {
         $('#typing-box button').click()
         setTimeout(() =>

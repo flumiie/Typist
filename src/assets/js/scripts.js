@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import $ from 'jquery'
 
 let typedWord, typedChar, toType, lineCount = 1, counter = 1
 let correctWords = [], wrongWords = [], userTyped = [], spl, temp = []
 let typedOncePerRedo = false, timerInterval = null, timer = 60
 
-export class Scripts extends React.Component
+class Scripts extends Component
 {
     constructor(props)
     {
