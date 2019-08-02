@@ -1,7 +1,6 @@
 let typedWord, typedChar, toType, lineCount = 1, counter = 1
 let correctWordList = [], wrongWordList = [], grossWords = [], userTyped = [], spl, temp = []
-let typedOncePerRedo = false, timerInterval = null, newLineInterval = null, timer = 0, res = 0
-var elm = ''
+let typedOncePerRedo = false, timerInterval = null, newLineInterval = null, timer = 0, diff = 0, res = 0
 var clen = timer.toString().split('').length
 
 function initTimer()
@@ -127,9 +126,12 @@ function shifter()
     }
 }
 
-function timerButtons()
+function optionButtons()
 {
+    var elm = ''
     timer = localStorage.getItem('timer')
+    diff = localStorage.getItem('Difficulty').split(',')
+
     if(timer == 15)
         elm = document.getElementById('timer-' + timer)
     else if(timer == 30)
@@ -138,9 +140,19 @@ function timerButtons()
         elm = document.getElementById('timer-' + timer)
     else if(timer == 120)
         elm = document.getElementById('timer-' + timer)
-    // else
-    //     elm = document.getElementById('timer-custom')
 
+    elm.style.background = 'orange'
+    elm.style.color = 'white'
+
+    if(diff[1] == 4)
+        elm = document.getElementById('diff-easy')
+    else if(diff[1] == 6)
+        elm = document.getElementById('diff-medium')
+    else if(diff[1] == 8)
+        elm = document.getElementById('diff-hard')
+    else if(diff[1] == 10)
+        elm = document.getElementById('diff-expert')
+    
     elm.style.background = 'orange'
     elm.style.color = 'white'
 }
@@ -198,7 +210,7 @@ function resetAll()
 $(document).ready(function()
 {
     digitalTimer()
-    timerButtons()
+    optionButtons()
 
     $('#typing-box input').focus()
     spl = $('.to-type span').html().split(' ')
