@@ -114,7 +114,12 @@ function shifter()
                 const second = $('.to-type p#' + escapeS + lineCount)
                 if(first.offset().top > second.offset().top)
                 {
-                    for(var i = lineCount; i < counter; i++) { $('.to-type p#' + escapeF + i).remove() }
+                    for(var i = lineCount; i < counter; i++)
+                    {
+                        let escape = ''
+                        if(i < 10) escape = '\\3'
+                        $('.to-type p#' + escape + i).remove()
+                    }
                     lineCount = counter
                 }
             }
