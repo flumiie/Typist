@@ -107,13 +107,14 @@ function shifter()
         {
             if(document.body.contains(document.querySelector('.to-type span p')))
             {
-                let escape = ''
-                if(counter < 10) escape = '\\3'
-                const first = $('.to-type p#' + escape + counter)
-                const second = $('.to-type p#' + escape + lineCount)
+                let escapeF = '', escapeS = ''
+                if(counter < 10) escapeF = '\\3'
+                if(lineCount < 10) escapeS = '\\3'
+                const first = $('.to-type p#' + escapeF + counter)
+                const second = $('.to-type p#' + escapeS + lineCount)
                 if(first.offset().top > second.offset().top)
                 {
-                    for(var i = lineCount; i < counter; i++) { $('.to-type p#' + escape + i).remove() }
+                    for(var i = lineCount; i < counter; i++) { $('.to-type p#' + escapeF + i).remove() }
                     lineCount = counter
                 }
             }
