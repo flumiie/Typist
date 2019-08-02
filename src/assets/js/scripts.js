@@ -10,8 +10,21 @@ export class Scripts extends React.Component
     constructor(props)
     {
         super(props)
-
+        
+        this.init()
         this.scripts = this.scripts.bind(this)
+    }
+
+    init = () =>
+    {
+        var tCache = localStorage.getItem('timer')
+        if(tCache == null || isNaN(tCache))
+        {
+            timer = 60
+            localStorage.setItem('timer', timer)
+        }
+        else
+            timer = tCache
     }
 
     scripts = () =>
