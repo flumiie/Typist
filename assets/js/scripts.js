@@ -1,22 +1,22 @@
 let typedWord, typedChar, toType, lineCount = 1, counter = 1
 let correctWordList = [], wrongWordList = [], grossWords = [], userTyped = [], spl, temp = []
 let typedOncePerRedo = false, timerInterval = null, newLineInterval = null, timer = 0, diff = 0, res = 0
-var clen = timer.toString().split('').length
 
 function initTimer()
 {
-    var tCache = localStorage.getItem('timer')
-    if(tCache == null || isNaN(tCache))
-    {
-        timer = 60
-        localStorage.setItem('timer', timer)
-    }
-    else
-        timer = tCache
+var tCache = localStorage.getItem('timer')
+if(tCache == null || isNaN(tCache))
+{
+    timer = 60
+    localStorage.setItem('timer', timer)
+}
+else
+    timer = tCache
     
 }
 initTimer()
-
+    
+var clen = timer.toString().split('').length
 function digitalTimer()
 {
     let clock = timer.toString().split('')
@@ -167,9 +167,9 @@ function optionButtons()
 function resetAll()
 {
     $('.to-type span').css('opacity', '0')
-    $('.timer p#1').css('display', '')
-    $('.timer p#2').css('display', '')
-    $('.timer p#3').css('display', '')
+    $('.timer p#\\31').css('display', '')
+    $('.timer p#\\32').css('display', '')
+    $('.timer p#\\33').css('display', '')
 
     correctWordList = []
     wrongWordList = []
