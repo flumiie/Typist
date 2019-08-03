@@ -87,6 +87,7 @@ function startTimer()
                 digitalTimer()
                 $('.to-type span p').remove()
                 $('.typing-container').css('height', '1em')
+                $('.to-type').css('height', '1em')
                 $('#typing-box input').val('').attr('disabled', true)
             }
         }, 1000)
@@ -150,13 +151,13 @@ function optionButtons()
     elm.style.background = 'orange'
     elm.style.color = 'white'
 
-    if(diff[1] == 4)
+    if(diff[1] == 3)
         elm = document.getElementById('diff-easy')
     else if(diff[1] == 6)
         elm = document.getElementById('diff-medium')
-    else if(diff[1] == 8)
+    else if(diff[1] == 9)
         elm = document.getElementById('diff-hard')
-    else if(diff[1] == 10)
+    else if(diff[1] == 12)
         elm = document.getElementById('diff-expert')
     
     elm.style.background = 'orange'
@@ -166,6 +167,9 @@ function optionButtons()
 function resetAll()
 {
     $('.to-type span').css('opacity', '0')
+    $('.timer p#1').css('display', '')
+    $('.timer p#2').css('display', '')
+    $('.timer p#3').css('display', '')
 
     correctWordList = []
     wrongWordList = []
@@ -190,6 +194,7 @@ function resetAll()
     // })
 
     $('.typing-container').css('height', '3.35em')
+    $('.to-type').css('height', '')
     toType = $('.to-type p#\\31').html()
     $('#typing-box input').css('text-align', '').removeAttr('disabled').val('').css('background', 'white').focus()
     typedWord = $('#typing-box input').val().trim().split(' ')
@@ -318,6 +323,7 @@ $(document).ready(function()
         }
     })
 
+    /** REDO BUTTON **/
     $('#typing-box button').on('click', function() { resetAll() })
     
     $('.timer-options button').on('click', function()

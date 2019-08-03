@@ -132,6 +132,7 @@
 
 .bottom-row-container
 {
+  z-index: 2;
   display: inline-flex;
   width: 97%;
   margin-bottom: 7px;

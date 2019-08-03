@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import $ from 'jquery'
 import '../css/modal.css'
 
-var randomWord = require('random-words')
+var randomWord = require('./wordGenerator')
 
 class Modal extends Component
 {
@@ -61,6 +61,7 @@ class Modal extends Component
 
     showMessage = () =>
     {
+        $('.to-type').css('height', '')
         if($('.options-innerds .message').css('opacity') === '0')
         {
             document.querySelector('.options-innerds .message').style.animation = 'showMessage 0.25s normal forwards ease'
@@ -111,78 +112,6 @@ class Modal extends Component
         this.timerElm = document.getElementById('timer-120')
         this.timerElm.style.background = 'orange'
         this.timerElm.style.color = 'white'
-
-        this.showMessage()
-    }
-
-    diffEasy = () =>
-    {
-        this.resetDiffButtons()
-        this.diffElm = document.getElementById('diff-easy')
-        this.diffElm.style.background = 'orange'
-        this.diffElm.style.color = 'white'
-
-        this.diff = [3, 4]
-        localStorage.setItem('Difficulty', this.diff)
-        if(this.diff[1] === 4)
-        {
-            this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 3, max: 4, maxLength: 4, join: ' ' })
-            localStorage.setItem('Generated Words', this.gens)
-        }
-
-        this.showMessage()
-    }
-
-    diffMedium = () =>
-    {
-        this.resetDiffButtons()
-        this.diffElm = document.getElementById('diff-medium')
-        this.diffElm.style.background = 'orange'
-        this.diffElm.style.color = 'white'
-
-        this.diff = [5, 6]
-        localStorage.setItem('Difficulty', this.diff)
-        if(this.diff[1] === 6)
-        {
-            this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 5, max: 6, maxLength: 6, join: ' ' })
-            localStorage.setItem('Generated Words', this.gens)
-        }
-
-        this.showMessage()
-    }
-
-    diffHard = () =>
-    {
-        this.resetDiffButtons()
-        this.diffElm = document.getElementById('diff-hard')
-        this.diffElm.style.background = 'orange'
-        this.diffElm.style.color = 'white'
-
-        this.diff = [6, 8]
-        localStorage.setItem('Difficulty', this.diff)
-        if(this.diff[1] === 8)
-        {
-            this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 6, max: 8, maxLength: 8, join: ' ' })
-            localStorage.setItem('Generated Words', this.gens)
-        }
-
-        this.showMessage()
-    }
-
-    diffExpert = () =>
-    {
-        this.resetDiffButtons()
-        this.diffElm = document.getElementById('diff-expert')
-        this.diffElm.style.background = 'orange'
-        this.diffElm.style.color = 'white'
-
-        this.diff = [8, 10]
-        localStorage.setItem('Difficulty', this.diff)
-        if(this.diff[1] === 10)
-        {
-            this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 8, max: 10, maxLength: 10, join: ' ' })
-            localStorage.setItem('Generated Words', this.gens)
-        }
 
         this.showMessage()
     }
