@@ -116,6 +116,17 @@ class Modal extends Component
         this.showMessage()
     }
 
+    timer4min = () =>
+    {
+        this.resetTimerButtons()
+        localStorage.setItem('timer', 240)
+        this.timerElm = document.getElementById('timer-240')
+        this.timerElm.style.background = 'orange'
+        this.timerElm.style.color = 'white'
+
+        this.showMessage()
+    }
+
     // timerCustom = () =>
     // {
     //     this.timerButtonsReset()

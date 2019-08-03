@@ -173,7 +173,7 @@ export default class Main extends Component
                 <button id="timer-30" onClick={ modal.timer30sec }>30</button>&nbsp;
                 <button id="timer-60" onClick={ modal.timer60sec }>60</button>&nbsp;
                 <button id="timer-120" onClick={ modal.timer2min }>120</button>&nbsp;
-                {/* <button id="timer-custom" onClick={ this.timerCustom }>Custom</button> */}
+                <button id="timer-240" onClick={ modal.timer4min }>240</button>&nbsp;
               </div>
               <div className="difficulty-options">
                 <h3>Difficulty:</h3>
