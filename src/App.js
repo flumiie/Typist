@@ -32,7 +32,7 @@ export default class Main extends Component
       this.diff = localStorage.getItem('Difficulty').split(',')
     
     this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: this.diff[0], maxLength: this.diff[1], join: ' ' })
-    localStorage.setItem('Generated Words', this.gens)
+    // localStorage.setItem('Generated Words', this.gens)
 
     this.state = {
       generator: this.gens
@@ -71,7 +71,7 @@ export default class Main extends Component
     if(this.diff[1] === 3)
     {
         this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: this.diff[0], maxLength: this.diff[1], join: ' ' })
-        localStorage.setItem('Generated Words', this.gens)
+        // localStorage.setItem('Generated Words', this.gens)
         this.setState({ generator: this.gens })
     }
 
@@ -91,7 +91,7 @@ export default class Main extends Component
     if(this.diff[1] === 6)
     {
         this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: this.diff[0], maxLength: this.diff[1], join: ' ' })
-        localStorage.setItem('Generated Words', this.gens)
+        // localStorage.setItem('Generated Words', this.gens)
         this.setState({ generator: this.gens })
     }
 
@@ -110,7 +110,7 @@ export default class Main extends Component
     if(this.diff[1] === 9)
     {
         this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: this.diff[0], maxLength: this.diff[1], join: ' ' })
-        localStorage.setItem('Generated Words', this.gens)
+        // localStorage.setItem('Generated Words', this.gens)
         this.setState({ generator: this.gens })
     }
 
@@ -129,9 +129,31 @@ export default class Main extends Component
     if(this.diff[1] === 12)
     {
         this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: this.diff[0], maxLength: this.diff[1], join: ' ' })
-        localStorage.setItem('Generated Words', this.gens)
+        // localStorage.setItem('Generated Words', this.gens)
         this.setState({ generator: this.gens })
     }
+
+    modal.showMessage()
+  }
+
+  diffRandom = () =>
+  {
+    modal.resetDiffButtons()
+    this.diffElm = document.getElementById('diff-random')
+    this.diffElm.style.background = 'orange'
+    this.diffElm.style.color = 'white'
+
+    let min = Math.round(Math.random() * 10)
+    let rand = Math.round(Math.random() * 100)
+    localStorage.setItem('Difficulty', rand)
+    this.gens = randomWord({ min: min, max: this.totalWordsPerMinute, maxLength: rand, join: ' ' })
+    // localStorage.setItem('Generated Words', this.gens)
+    this.setState({ generator: this.gens })
+
+    setTimeout(function()
+    {
+      $('#typing-box button').click()
+    }, 75)
 
     modal.showMessage()
   }
@@ -152,7 +174,7 @@ export default class Main extends Component
         if($('.to-type p').length < 14)
         {
           if(event.which === 32 || event.keyCode === 32)
-            this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: 1, maxLength: this.diff, join: ' ' })
+            this.gens = randomWord({ exactly: this.totalWordsPerMinute, min: this.diff[0], maxLength: this.diff[1], join: ' ' })
         }
       })
     })
@@ -181,6 +203,8 @@ export default class Main extends Component
                 <button id="diff-medium" onClick={ this.diffMedium }>Medium</button>&nbsp;
                 <button id="diff-hard" onClick={ this.diffHard }>Hard</button>&nbsp;
                 <button id="diff-expert" onClick={ this.diffExpert }>Expert</button>&nbsp;
+                <br/>
+                <button id="diff-random" onClick={ this.diffRandom }>Randomize</button>
                 {/* <button id="timer-custom" onClick={ this.timerCustom }>Custom</button> */}
               </div>
             </div>

@@ -1,8 +1,9 @@
+// eslint-disable-next-line
 import React, { Component } from 'react'
 import $ from 'jquery'
 import '../css/modal.css'
 
-var randomWord = require('./wordGenerator')
+// var randomWord = require('./wordGenerator')
 
 class Modal extends Component
 {
@@ -18,7 +19,7 @@ class Modal extends Component
 
     componentDidMount()
     {
-        if(localStorage.getItem('Generated Words') === null)
+        if(localStorage.getItem('Difficulty') === null)
             this.diffEasy()
     }
 

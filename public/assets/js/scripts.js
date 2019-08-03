@@ -165,6 +165,8 @@ function optionButtons()
         elm = document.getElementById('diff-hard')
     else if(diff[1] == 12)
         elm = document.getElementById('diff-expert')
+    else
+        elm = document.getElementById('diff-random')
     
     elm.style.background = 'orange'
     elm.style.color = 'white'
