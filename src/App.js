@@ -246,7 +246,7 @@ export default class Main extends Component
               <div className="options" onClick={ modal.openModal }>
                 <img src="assets/img/settings.svg" width="25px" alt=""/>
               </div>
-              <div className="wpm-container">Errors: <span id="errors"></span> | WPM: <span id="net-wpm"></span></div>
+              <div className="wpm-container">Errors: <span id="errors">0</span> | WPM: <span id="net-wpm">0</span></div>
             </div>
           </div>
           {/* <div className="hidden-elements"></div> */}
