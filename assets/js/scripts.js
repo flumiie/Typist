@@ -61,6 +61,8 @@ function calc()
 
     var grossWPM = (grossWords.join(' ').length / 5) / minute
     var netWPM = grossWPM - (wrongWords.length / minute)
+    
+    $('.wpm-container').css('animation', 'highlight 1s normal forwards ease')
 
     $('#errors').html(Math.round(errors))
     $('#net-wpm').html(Math.round(netWPM))
