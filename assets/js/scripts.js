@@ -37,29 +37,33 @@ function digitalTimer()
 
 function calc()
 {
-    let wrongWords = []
+    let wrongWords = [], gw = [], errors = 0, minute, second
     for(var i = 0; i < wrongWordList.length; i++)
     {
         if(wrongWordList[i] != '')
-            wrongWords.push(wrongWordList[i])
+        wrongWords.push(wrongWordList[i])
     }
 
     let timer = localStorage.getItem('timer')
     if(timer < 60)
-        var minute = (timer / 60)
+        minute = (timer / 60)
     else
     {
-        var minute = (timer - timer % 60) / 60
-        var second = timer - minute
+        minute = (timer - timer % 60) / 60
+        second = timer - minute
+    }
+
+    for(var i = 0; i < wrongWordList.length; i++)
+    {
+        if(wrongWordList[i] != '')
+            errors += 1
     }
 
     var grossWPM = (grossWords.join(' ').length / 5) / minute
     var netWPM = grossWPM - (wrongWords.length / minute)
-    grossWPM = Math.round(grossWPM)
-    netWPM = Math.round(netWPM)
 
-    $('#gross-wpm').html(grossWPM)
-    $('#net-wpm').html(netWPM)
+    $('#errors').html(Math.round(errors))
+    $('#net-wpm').html(Math.round(netWPM))
 
     // if(grossWPM == 0)
 }
