@@ -147,6 +147,8 @@ function optionButtons()
         elm = document.getElementById('timer-' + timer)
     else if(timer == 120)
         elm = document.getElementById('timer-' + timer)
+    else if(timer == 240)
+        elm = document.getElementById('timer-' + timer)
 
     elm.style.background = 'orange'
     elm.style.color = 'white'
