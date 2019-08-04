@@ -183,6 +183,7 @@ export default class Main extends Component
       <div className="container">
 
         <div className="options-modal">
+          <div className="options-container">
           <div className="options-innerds">
             <div className="options-title">
               <h2>Settings</h2>
@@ -209,6 +210,7 @@ export default class Main extends Component
               </div>
             </div>
             <div className="message">The timer has been reset</div>
+          </div>
           </div>
         </div>
 
