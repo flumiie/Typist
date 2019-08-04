@@ -60,7 +60,8 @@ function calc()
     }
 
     var grossWPM = (grossWords.join(' ').length / 5) / minute
-    var netWPM = grossWPM - (wrongWords.length / minute)
+    // var netWPM = (correctWordList.join(' ').length / 5) / minute
+    var netWPM = grossWPM - (errors / minute)
     
     $('.wpm-container').addClass('res-highlight')
     void document.querySelector('.wpm-container').offsetWidth
@@ -335,18 +336,16 @@ $(document).ready(function()
         }
         else
         {
-            for(var i = (typedWord.split('').length-1); i < typedWord.split('').length; i++)
+            let patt = new RegExp(typedWord);
+            if(patt.test(toType))
             {
-                if(typedWord.split('')[i] == toType.split('')[i])
-                {
-                    $('.to-type p#' + escape + counter).css('background-color', '#0CC')
-                    $('#typing-box input').css('background-color', '')
-                }
-                else
-                {
-                    $('.to-type p#' + escape + counter).css('background-color', '#E91E63')
-                    $('#typing-box input').css('background-color', '#E91E63')
-                }
+                $('.to-type p#' + escape + counter).css('background-color', '#0CC')
+                $('#typing-box input').css('background-color', '')
+            }
+            else
+            {
+                $('.to-type p#' + escape + counter).css('background-color', '#E91E63')
+                $('#typing-box input').css('background-color', '#E91E63')
             }
         }
     })
