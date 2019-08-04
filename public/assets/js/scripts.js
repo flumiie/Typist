@@ -179,9 +179,22 @@ function optionButtons()
 function resetAll()
 {
     $('.to-type span').css('opacity', '0')
-    $('.timer p#\\31').css('display', '')
-    $('.timer p#\\32').css('display', '')
-    $('.timer p#\\33').css('display', '')
+
+    setTimeout(function()
+    {
+        let sel = localStorage.getItem('timer')
+        if(sel == '15' || sel == '30' || sel == '60')
+        {
+            $('.timer p#\\31').css('display', '')
+            $('.timer p#\\32').css('display', '')
+        }
+        else if(sel == '120' || sel == '240')
+        {
+            $('.timer p#\\31').css('display', '')
+            $('.timer p#\\32').css('display', '')
+            $('.timer p#\\33').css('display', '')
+        }
+    }, 1)
 
     correctWordList = []
     wrongWordList = []

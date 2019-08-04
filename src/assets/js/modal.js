@@ -42,6 +42,18 @@ class Modal extends Component
         }, 250)
     }
 
+    setTimer = (id) =>
+    {
+        this.resetTimerButtons()
+
+        localStorage.setItem('timer', id.split('-')[1])
+        let elm = document.getElementById(id)
+        elm.style.background = 'orange'
+        elm.style.color = 'white'
+
+        this.showMessage()
+    }
+
     resetTimerButtons = () =>
     {
         let elm = document.querySelectorAll('.timer-options button')
@@ -54,11 +66,11 @@ class Modal extends Component
 
     resetDiffButtons = () =>
     {
-        var tb = document.querySelectorAll('.difficulty-options button')
-        for(var i = 0; i < tb.length; i++)
+        let elm = document.querySelectorAll('.difficulty-options button')
+        for(var i = 0; i < elm.length; i++)
         {
-            tb[i].style.background = 'rgb(156, 144, 120)'
-            tb[i].style.color = 'black'
+            elm[i].style.background = 'rgb(156, 144, 120)'
+            elm[i].style.color = 'black'
         }
     }
 
@@ -73,17 +85,6 @@ class Modal extends Component
                 document.querySelector('.options-innerds .message').style.animation = 'hideMessage 0.25s normal forwards ease'
             }, 3000)
         }
-    }
-
-    setTimer = (id) =>
-    {
-        this.resetTimerButtons()
-        localStorage.setItem('timer', id.split('-')[1])
-        let elm = document.getElementById(id)
-        elm.style.background = 'orange'
-        elm.style.color = 'white'
-
-        this.showMessage()
     }
 
     // timerCustom = () =>
