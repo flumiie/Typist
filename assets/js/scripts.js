@@ -322,15 +322,18 @@ $(document).ready(function()
         }
         else
         {
-            if(toType.match(typedWord))
+            for(var i = (typedWord.split('').length-1); i < typedWord.split('').length; i++)
             {
-                $('.to-type p#' + escape + counter).css('background-color', '#0CC')
-                $('#typing-box input').css('background-color', '')
-            }
-            else
-            {
-                $('.to-type p#' + escape + counter).css('background-color', '#E91E63')
-                $('#typing-box input').css('background-color', '#E91E63')
+                if(typedWord.split('')[i] == toType.split('')[i])
+                {
+                    $('.to-type p#' + escape + counter).css('background-color', '#0CC')
+                    $('#typing-box input').css('background-color', '')
+                }
+                else
+                {
+                    $('.to-type p#' + escape + counter).css('background-color', '#E91E63')
+                    $('#typing-box input').css('background-color', '#E91E63')
+                }
             }
         }
     })
