@@ -149,6 +149,11 @@
   padding: 0 7px;
   font-size: 26px
 }
+.res-highlight
+{
+  position: relative;
+  animation: highlight 1s normal forwards ease
+}
 
 .footer
 {
@@ -169,5 +174,5 @@
 {
   0% { background: wheat }
   65% { background: wheat }
-  100% { background: transparent }
+  100% { background: '' }
 }
