@@ -252,6 +252,8 @@ export default class Main extends Component
           {/* <div className="hidden-elements"></div> */}
         </header>
         <div className="footer">
+          <a id="page-stats" href="https://clustrmaps.com/site/1au3h" title="Visit tracker"><img src="//www.clustrmaps.com/map_v2.png?d=FEZshgi7p2WTv9NT8wV70ywi6B6Czxapj0Blqypr1AY&cl=ffffff" alt=""/></a>
+          <br/>
           Made by <a href="http://github.com/fralyx" target="_blank" rel="noopener noreferrer">fralyx</a> with ❤ in <a href="http://reactjs.org" target="_blank" rel="noopener noreferrer">React.JS</a>
         </div>
       </div>

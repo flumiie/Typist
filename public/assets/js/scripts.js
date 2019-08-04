@@ -357,4 +357,12 @@ $(document).ready(function()
             digitalTimer()
         }, 1)
     })
+
+    $('#page-stats').hover(function()
+    {
+        $('#page-stats').css('opacity', 1)
+    }, function()
+    {
+        $('#page-stats').css('opacity', 0)
+    })
 })

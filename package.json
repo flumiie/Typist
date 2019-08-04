@@ -20,7 +20,8 @@
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "pushdeploy": "git push origin master & yarn run deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
