@@ -78,7 +78,7 @@ class Modal extends Component
     setTimer = (id) =>
     {
         this.resetTimerButtons()
-        localStorage.setItem('timer', 15)
+        localStorage.setItem('timer', id.split('-')[1])
         let elm = document.getElementById(id)
         elm.style.background = 'orange'
         elm.style.color = 'white'
