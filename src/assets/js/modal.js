@@ -13,8 +13,10 @@ class Modal extends Component
         this.totalWordsPerMinute = 500
         this.diff = ''
         this.gens = ''
-        this.timerElm = ''
         this.diffElm = ''
+
+        this.setTimer = this.setTimer.bind(this)
+        this.resetTimerButtons = this.resetTimerButtons.bind(this)
     }
 
     componentDidMount()
@@ -42,11 +44,11 @@ class Modal extends Component
 
     resetTimerButtons = () =>
     {
-        var tb = document.querySelectorAll('.timer-options button')
-        for(var i = 0; i < tb.length; i++)
+        let elm = document.querySelectorAll('.timer-options button')
+        for(var i = 0; i < elm.length; i++)
         {
-            tb[i].style.background = 'rgb(156, 144, 120)'
-            tb[i].style.color = 'black'
+            elm[i].style.background = 'rgb(156, 144, 120)'
+            elm[i].style.color = 'black'
         }
     }
 
@@ -73,57 +75,13 @@ class Modal extends Component
         }
     }
 
-    timer15sec = () =>
+    setTimer = (id) =>
     {
         this.resetTimerButtons()
         localStorage.setItem('timer', 15)
-        this.timerElm = document.getElementById('timer-15')
-        this.timerElm.style.background = 'orange'
-        this.timerElm.style.color = 'white'
-
-        this.showMessage()
-    }
-
-    timer30sec = () =>
-    {
-        this.resetTimerButtons()
-        localStorage.setItem('timer', 30)
-        this.timerElm = document.getElementById('timer-30')
-        this.timerElm.style.background = 'orange'
-        this.timerElm.style.color = 'white'
-
-        this.showMessage()
-    }
-
-    timer60sec = () =>
-    {
-        this.resetTimerButtons()
-        localStorage.setItem('timer', 60)
-        this.timerElm = document.getElementById('timer-60')
-        this.timerElm.style.background = 'orange'
-        this.timerElm.style.color = 'white'
-
-        this.showMessage()
-    }
-
-    timer2min = () =>
-    {
-        this.resetTimerButtons()
-        localStorage.setItem('timer', 120)
-        this.timerElm = document.getElementById('timer-120')
-        this.timerElm.style.background = 'orange'
-        this.timerElm.style.color = 'white'
-
-        this.showMessage()
-    }
-
-    timer4min = () =>
-    {
-        this.resetTimerButtons()
-        localStorage.setItem('timer', 240)
-        this.timerElm = document.getElementById('timer-240')
-        this.timerElm.style.background = 'orange'
-        this.timerElm.style.color = 'white'
+        let elm = document.getElementById(id)
+        elm.style.background = 'orange'
+        elm.style.color = 'white'
 
         this.showMessage()
     }
