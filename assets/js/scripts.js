@@ -336,16 +336,19 @@ $(document).ready(function()
         }
         else
         {
-            let patt = new RegExp(typedWord);
-            if(patt.test(toType))
+            for(var i = 0; i < typedChar.length; i++)
             {
-                $('.to-type p#' + escape + counter).css('background-color', '#0CC')
-                $('#typing-box input').css('background-color', '')
-            }
-            else
-            {
-                $('.to-type p#' + escape + counter).css('background-color', '#E91E63')
-                $('#typing-box input').css('background-color', '#E91E63')
+                if(typedChar[i] == toType.split('')[i])
+                {
+                    $('.to-type p#' + escape + counter).css('background-color', '#0CC')
+                    $('#typing-box input').css('background-color', '')
+                }
+                else
+                {
+                    $('.to-type p#' + escape + counter).css('background-color', '#E91E63')
+                    $('#typing-box input').css('background-color', '#E91E63')
+                    break
+                }
             }
         }
     })
