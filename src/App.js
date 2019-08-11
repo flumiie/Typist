@@ -17,11 +17,10 @@ export default class Main extends Component
     super(props)
     
     this.cnt = 1
-    this.type = ''
     this.diff = 0
+    this.type = ''
     this.gens = ''
     this.totalWordsPerMinute = 500
-    this.elm = ''
 
     if(localStorage.getItem('Difficulty') == null)
     {
@@ -182,81 +181,88 @@ export default class Main extends Component
     return (
       <div className="container">
 
-        <div className="options-modal">
-          <div className="options-container">
-          <div className="options-innerds">
-            <div className="options-title">
-              <h2>Settings</h2>
-              <span className="close" onClick={ modal.closeModal }>&times;</span>
-            </div>
-            <div className="options-content">
-              <div className="timer-options">
-                <h3>Timer:</h3>
-                <button id="timer-15" onClick={() => modal.setTimer('timer-15') }>15</button>&nbsp;
-                <button id="timer-30" onClick={() => modal.setTimer('timer-30') }>30</button>&nbsp;
-                <button id="timer-60" onClick={() => modal.setTimer('timer-60') }>60</button>&nbsp;
-                <button id="timer-120" onClick={() => modal.setTimer('timer-120') }>120</button>&nbsp;
-                <button id="timer-240" onClick={() => modal.setTimer('timer-240') }>240</button>&nbsp;
-              </div>
-              <div className="difficulty-options">
-                <h3>Difficulty:</h3>
-                <button id="diff-easy" onClick={ this.diffEasy }>Easy</button>&nbsp;
-                <button id="diff-medium" onClick={ this.diffMedium }>Medium</button>&nbsp;
-                <button id="diff-hard" onClick={ this.diffHard }>Hard</button>&nbsp;
-                <button id="diff-expert" onClick={ this.diffExpert }>Expert</button>&nbsp;
-                <br/>
-                <button id="diff-random" onClick={ this.diffRandom }>Randomize</button>
-                {/* <button id="timer-custom" onClick={ this.timerCustom }>Custom</button> */}
-              </div>
-            </div>
-            <div className="message">The timer has been reset</div>
-          </div>
-          </div>
+        <div className="mobile-unsupported">
+          <span className="mu-message">
+            Mobile is currently unsupported due to the very small width of the screen, but will support landscape mode in the future.
+          </span>
         </div>
-
-        <header className="header">
-          <div className="whole-bag-of-jellybean">
-            <div className="top-container">
-              <div className="title">
-                Typist
+        <div className="desktop">
+          <div className="options-modal">
+            <div className="options-container">
+            <div className="options-innerds">
+              <div className="options-title">
+                <h2>Settings</h2>
+                <span className="close" onClick={ modal.closeModal }>&times;</span>
               </div>
-              <div className="timer-container">
-                <div className="timer">
-                  <p id="1"></p>
-                  <p id="2"></p>
-                  <p id="3"></p>
+              <div className="options-content">
+                <div className="timer-options">
+                  <h3>Timer:</h3>
+                  <button id="timer-15" onClick={() => modal.setTimer('timer-15') }>15</button>&nbsp;
+                  <button id="timer-30" onClick={() => modal.setTimer('timer-30') }>30</button>&nbsp;
+                  <button id="timer-60" onClick={() => modal.setTimer('timer-60') }>60</button>&nbsp;
+                  <button id="timer-120" onClick={() => modal.setTimer('timer-120') }>120</button>&nbsp;
+                  <button id="timer-240" onClick={() => modal.setTimer('timer-240') }>240</button>&nbsp;
+                </div>
+                <div className="difficulty-options">
+                  <h3>Difficulty:</h3>
+                  <button id="diff-easy" onClick={ this.diffEasy }>Easy</button>&nbsp;
+                  <button id="diff-medium" onClick={ this.diffMedium }>Medium</button>&nbsp;
+                  <button id="diff-hard" onClick={ this.diffHard }>Hard</button>&nbsp;
+                  <button id="diff-expert" onClick={ this.diffExpert }>Expert</button>&nbsp;
+                  <br/>
+                  <button id="diff-random" onClick={ this.diffRandom }>Randomize</button>
+                  {/* <button id="timer-custom" onClick={ this.timerCustom }>Custom</button> */}
                 </div>
               </div>
+              <div className="message">The timer has been reset</div>
             </div>
-            <div className="typing-container">
-              <div className="to-type">
-                {/* <WordAnim
-                  word={ rando }
-                  speed={75}
-                  rounds={5}
-                  letters="0123456789~!@#$%^&*()_+ &nbsp;"
-                /> */}
-                <span>{ this.state.generator }</span>
-              </div>
-            </div>
-            <div id="typing-box">
-              <input type="text"/>
-              {/* <input type="text" disabled placeholder="Still under maintenance, stay updated!" style={{textAlign:'center',textTransform:'uppercase'}}/> */}
-              <button id="redo" onClick={ this.wordRenderer }>↻</button>
-            </div>
-            <div className="bottom-row-container">
-              <div className="options" onClick={ modal.openModal }>
-                <img src="assets/img/settings.svg" width="25px" alt=""/>
-              </div>
-              <div className="wpm-container">Errors: <span id="errors">0</span> | WPM: <span id="net-wpm">0</span></div>
             </div>
           </div>
-          {/* <div className="hidden-elements"></div> */}
-        </header>
-        <div className="footer">
-          <a id="page-stats" href="https://clustrmaps.com/site/1au3h" title="Visit tracker"><img src="//www.clustrmaps.com/map_v2.png?d=FEZshgi7p2WTv9NT8wV70ywi6B6Czxapj0Blqypr1AY&cl=ffffff" alt=""/></a>
-          <br/>
-          Made by <a href="http://github.com/fralyx" target="_blank" rel="noopener noreferrer">fralyx</a> with ❤ in <a href="http://reactjs.org" target="_blank" rel="noopener noreferrer">React.JS</a>
+
+          <header className="header">
+            <div className="whole-bag-of-jellybean">
+              <div className="top-container">
+                <div className="title">
+                  Typist
+                </div>
+                <div className="timer-container">
+                  <div className="timer">
+                    <p id="1"></p>
+                    <p id="2"></p>
+                    <p id="3"></p>
+                  </div>
+                </div>
+              </div>
+              <div className="typing-container">
+                <div className="to-type">
+                  {/* <WordAnim
+                    word={ rando }
+                    speed={75}
+                    rounds={5}
+                    letters="0123456789~!@#$%^&*()_+ &nbsp;"
+                  /> */}
+                  <span>{ this.state.generator }</span>
+                </div>
+              </div>
+              <div id="typing-box">
+                <input type="text"/>
+                {/* <input type="text" disabled placeholder="Still under maintenance, stay updated!" style={{textAlign:'center',textTransform:'uppercase'}}/> */}
+                <button id="redo" onClick={ this.wordRenderer }>↻</button>
+              </div>
+              <div className="bottom-row-container">
+                <div className="options" onClick={ modal.openModal }>
+                  <img src="assets/img/settings.svg" width="25px" alt=""/>
+                </div>
+                <div className="wpm-container">Errors: <span id="errors">0</span> | WPM: <span id="net-wpm">0</span></div>
+              </div>
+            </div>
+            {/* <div className="hidden-elements"></div> */}
+          </header>
+          <div className="footer">
+            <a id="page-stats" href="https://clustrmaps.com/site/1au3h" title="Visit tracker"><img src="//www.clustrmaps.com/map_v2.png?d=FEZshgi7p2WTv9NT8wV70ywi6B6Czxapj0Blqypr1AY&cl=ffffff" alt=""/></a>
+            <br/>
+            Made by <a href="http://github.com/fralyx" target="_blank" rel="noopener noreferrer">fralyx</a> with ❤ in <a href="http://reactjs.org" target="_blank" rel="noopener noreferrer">React.JS</a>
+          </div>
         </div>
       </div>
     );
