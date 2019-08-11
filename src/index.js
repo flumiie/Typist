@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import './assets/css/index.css';
 import App from './App';
-import Routes from './Routes'
+// import Routes from './Routes'
 
 import * as serviceWorker from './serviceWorker';
 
