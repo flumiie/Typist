@@ -265,55 +265,53 @@ $(document).ready(function()
     {
         if(event.which == 32 || event.keyCode == 32)
         {
-            setTimeout(() =>
+            $('#typing-box input').val('')
+            setTimeout(() => { $('#typing-box input').val('') }, 1)
+            let escape = ''
+            if(counter < 10) escape = '\\3'
+
+            toType = $('.to-type p#' + escape + counter).html()
+
+            if(typedWord == ''){}
+            else
             {
-                $('#typing-box input').val('')
-                let escape = ''
-                if(counter < 10) escape = '\\3'
-
-                toType = $('.to-type p#' + escape + counter).html()
-
-                if(typedWord == ''){}
-                else
+                if(typedWord != undefined)
                 {
-                    if(typedWord != undefined)
+                    $('.to-type p#' + escape + (counter+1)).css('background-color', '#0CC')
+                    grossWords.push(typedWord)
+                    if(typedWord == $('.to-type p#' + escape + counter).html())
                     {
-                        $('.to-type p#' + escape + (counter+1)).css('background-color', '#0CC')
-                        grossWords.push(typedWord)
-                        if(typedWord == $('.to-type p#' + escape + counter).html())
-                        {
-                            $('.to-type p#' + escape + counter).css('color', '#8BC34A')
-                            $('.to-type p#' + escape + counter).css('background-color', '')
-                            correctWordList.push(toType)
-                            wrongWordList.push('')
-                            // userTyped.push(typedWord)
-                        }
-                        else
-                        {
-                            $('.to-type p#' + escape + counter).css('color', 'white')
-                            $('.to-type p#' + escape + counter).css('color', '#E91E63')
-                            $('.to-type p#' + escape + counter).css('background-color', '')
-                            correctWordList.push('')
-                            wrongWordList.push(toType)
-
-                            // userTyped.push(typedWord)
-                            // if(userTyped.length >= 8)
-                            // {
-                            //     for(var i = 0; i <= 7; i++)
-                            //     {
-                            //         if(toType == userTyped[i])
-                            //             break
-                            //         else if(i === 7)
-                            //         {
-                            //             $('#typing-box input').css({'background-color': '', 'text-align': 'center'}).val('Whoops, let\'s try that again').attr('disabled', true)
-                            //         }
-                            //     }
-                            // }
-                        }
-                        counter++
+                        $('.to-type p#' + escape + counter).css('color', '#8BC34A')
+                        $('.to-type p#' + escape + counter).css('background-color', '')
+                        correctWordList.push(toType)
+                        wrongWordList.push('')
+                        // userTyped.push(typedWord)
                     }
+                    else
+                    {
+                        $('.to-type p#' + escape + counter).css('color', 'white')
+                        $('.to-type p#' + escape + counter).css('color', '#E91E63')
+                        $('.to-type p#' + escape + counter).css('background-color', '')
+                        correctWordList.push('')
+                        wrongWordList.push(toType)
+
+                        // userTyped.push(typedWord)
+                        // if(userTyped.length >= 8)
+                        // {
+                        //     for(var i = 0; i <= 7; i++)
+                        //     {
+                        //         if(toType == userTyped[i])
+                        //             break
+                        //         else if(i === 7)
+                        //         {
+                        //             $('#typing-box input').css({'background-color': '', 'text-align': 'center'}).val('Whoops, let\'s try that again').attr('disabled', true)
+                        //         }
+                        //     }
+                        // }
+                    }
+                    counter++
                 }
-            }, 1)
+            }
         }
     })
 
