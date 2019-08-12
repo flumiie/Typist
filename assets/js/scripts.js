@@ -37,6 +37,15 @@ function digitalTimer()
 
 function calc()
 {
+    const setNumWordsInText = b => {
+        let s = b
+        s = s.replace(/(^\s*)|(\s*$)/gi, "")
+        s = s.replace(/[ ]{2,}/gi, " ")
+        s = s.replace(/\n /, "\n")
+        return s.split(" ").length
+    }
+    const updateWPM = (t, w) => (w / t) * 60
+    
     let wrongWords = [], gw = [], errors = 0, minute, second
     for(var i = 0; i < wrongWordList.length; i++)
     {
@@ -44,14 +53,9 @@ function calc()
         wrongWords.push(wrongWordList[i])
     }
 
-    let timer = localStorage.getItem('timer')
-    if(timer < 60)
-        minute = (timer / 60)
-    else
-    {
-        minute = (timer - timer % 60) / 60
-        second = timer - minute
-    }
+    second = localStorage.getItem('timer')
+    if(second < 60) minute = (second / 60)
+    else minute = (second - second % 60) / 60
 
     for(var i = 0; i < wrongWordList.length; i++)
     {
@@ -59,9 +63,9 @@ function calc()
             errors += 1
     }
 
-    var grossWPM = (grossWords.join(' ').length / 5) / minute
-    // var netWPM = (correctWordList.join(' ').length / 5) / minute
-    var netWPM = grossWPM - (errors / minute)
+    const numWordsInText = setNumWordsInText(grossWords.join(' '))
+    const grossWPM = updateWPM(second, numWordsInText)
+    const netWPM = grossWPM - (errors / minute)
     
     $('.wpm-container').addClass('res-highlight')
     void document.querySelector('.wpm-container').offsetWidth
