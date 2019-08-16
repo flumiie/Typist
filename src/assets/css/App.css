@@ -27,7 +27,7 @@
 .whole-bag-of-jellybean
 {
   border-radius: 10px;
-  width: 55%;
+  width: 50%;
   background: gray
 }
 /* .hidden-elements
@@ -58,15 +58,9 @@
   font-family: 'DSDigital';
   margin: 0 0 0 auto
 }
-.timer p:nth-child(1) { right: 25% }
-.timer p:nth-child(2) { right: 24.3% }
-.timer p:nth-child(3) { right: 23.6% }
-@media (width: 1366px)
-{
-  .timer p:nth-child(1) { right: 25.5% }
-  .timer p:nth-child(2) { right: 24.55% }
-  .timer p:nth-child(3) { right: 23.6% }
-}
+.timer p:nth-child(1) { right: 27.5% }
+.timer p:nth-child(2) { right: 26.8% }
+.timer p:nth-child(3) { right: 26.1% }
 
 .typing-container { height: 3.35em }
 #typing-box
@@ -84,13 +78,11 @@
   border: none;
   width: 75%;
   height: 45px;
-  margin-left: -45px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px
 }
 #typing-box button
 {
-  position: absolute;
   width: 50px;
   height: 47px;
   border: none;
@@ -127,7 +119,7 @@
 
 #redo
 {
-  font-size: 20px
+  font-size: 23px
 }
 
 .bottom-row-container
@@ -194,16 +186,46 @@
   padding: 0 15%;
   font-size: 27px
 }
-@media (max-width: 650px)
-{
-  .desktop { display: none }
-  .mobile-unsupported,
-  .mu-message { display: block }
-}
 
 @keyframes highlight
 {
   0% { background: wheat }
   65% { background: wheat }
   100% { background: '' }
+}
+
+@media (width: 1366px)
+{
+  .timer p:nth-child(1) { right: 25.5% }
+  .timer p:nth-child(2) { right: 24.55% }
+  .timer p:nth-child(3) { right: 23.6% }
+}
+@media (max-width: 1024px)
+{
+  .whole-bag-of-jellybean { width: 85% }
+  #typing-box input { width: 80% }
+  .timer p:nth-child(1) { right: 14% }
+  .timer p:nth-child(2) { right: 12% }
+  .timer p:nth-child(3) { right: 10% }
+  /* .mobile-unsupported,
+  .mu-message { display: block } */
+}
+@media (max-width: 800px)
+{
+  #typing-box { margin-top: -10px }
+  #typing-box input { width: 80% }
+  .timer p:nth-child(1) { right: 14% }
+  .timer p:nth-child(2) { right: 12% }
+  .timer p:nth-child(3) { right: 10% }
+  /* .mobile-unsupported,
+  .mu-message { display: block } */
+}
+@media (max-width: 420px)
+{
+  .whole-bag-of-jellybean { width: 100% }
+  .timer p:nth-child(1) { right: 10% }
+  .timer p:nth-child(2) { right: 7.5% }
+  .timer p:nth-child(3) { right: 5% }
+  /* .mobile-unsupported,
+  .mu-message { display: block } */
 }
