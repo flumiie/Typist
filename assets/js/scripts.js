@@ -54,8 +54,10 @@ function calc()
     }
 
     second = localStorage.getItem('timer')
-    if(second < 60) minute = (second / 60)
-    else minute = (second - second % 60) / 60
+    if(second < 60)
+        minute = (second / 60)
+    else
+        minute = (second - second % 60) / 60
 
     for(var i = 0; i < wrongWordList.length; i++)
     {
