@@ -82,7 +82,7 @@ function calc()
 /**
  * Interval for each 1 second
  */
-function startTimer()
+function stopStartTimer()
 {
     if(timerInterval == null)
     {
@@ -323,12 +323,13 @@ $(document).ready(function()
 
     $('#typing-box input').on('input', function()
     {
-        let escape = ''
+        let cookie = document.cookie.split(' ').join('').split(';'),
+            escape = ''
         if(counter < 10) escape = '\\3'
 
         if(typedOncePerRedo == false)
         {
-            startTimer()
+            stopStartTimer()
             typedOncePerRedo = true
         }
         typedWord = $('#typing-box input').val().trim()
@@ -353,6 +354,11 @@ $(document).ready(function()
                 {
                     $('.to-type p#' + escape + counter).css('background-color', '#E91E63')
                     $('#typing-box input').css('background-color', '#E91E63')
+                    if(cookie.indexOf('instant-death=on') >= 0)
+                    {
+                        $('#typing-box input').attr('disabled', true).css('background-color', '').val($('#typing-box input').val() + ' <- Instant Death!')
+                        setTimeout(() => stopStartTimer(), 1)
+                    }
                     break
                 }
             }
@@ -362,7 +368,7 @@ $(document).ready(function()
     /** REDO BUTTON **/
     $('#typing-box button').on('click', function() { resetAll() })
     
-    $('.timer-options button').on('click', function()
+    function reset()
     {
         $('#typing-box button').click()
         setTimeout(() =>
@@ -370,23 +376,13 @@ $(document).ready(function()
             timer = localStorage.getItem('timer')
             digitalTimer()
         }, 1)
-    })
+    }
+    $('.timer-options button').on('click', function() { reset() });
+    $('.difficulty-options button').on('click', function() { reset() });
+    $('#is-death').on('click', function() { reset() });
 
-    $('.difficulty-options').on('click', function()
-    {
-        $('#typing-box button').click()
-        setTimeout(() =>
-        {
-            timer = localStorage.getItem('timer')
-            digitalTimer()
-        }, 1)
-    })
-
-    $('#page-stats').hover(function()
-    {
-        $('#page-stats').css('opacity', 1)
-    }, function()
-    {
-        $('#page-stats').css('opacity', 0)
-    })
+    $('#page-stats').hover(
+        function() { $('#page-stats').css('opacity', 1) },
+        function() { $('#page-stats').css('opacity', 0) }
+    )
 })

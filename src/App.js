@@ -49,6 +49,13 @@ export default class Main extends Component
         this.type = $('#typing-box input').val()
       }, 70)
     })
+
+    let cookie = document.cookie.split(' ').join('').split(';')
+    if(cookie.indexOf('instant-death=on') === -1)
+    {
+      if(cookie.indexOf('instant-death=off') === -1)
+        document.cookie = 'instant-death=off'
+    }
   }
   
   wordRenderer = () =>
@@ -149,10 +156,32 @@ export default class Main extends Component
     // localStorage.setItem('Generated Words', this.gens)
     this.setState({ generator: this.gens })
 
-    setTimeout(function()
+    setTimeout(function() { $('#typing-box button').click() }, 75)
+
+    modal.showMessage()
+  }
+
+  instantDeath = () =>
+  {
+    let cookie = document.cookie.split(' ').join('').split(';')
+    if(cookie.indexOf('instant-death=off') >= 0)
     {
-      $('#typing-box button').click()
-    }, 75)
+      document.cookie = 'instant-death=on'
+      $('#is-death').html('On').css(
+      {
+        'color': 'white',
+        'background': 'orange'
+      })
+    }
+    else
+    {
+      document.cookie = 'instant-death=off'
+      $('#is-death').html('Off').css(
+      {
+        'color': 'black',
+        'background': 'rgb(156, 144, 120)'
+      })
+    }
 
     modal.showMessage()
   }
@@ -191,7 +220,7 @@ export default class Main extends Component
             <div className="options-container">
             <div className="options-innerds">
               <div className="options-title">
-                <h2>Settings</h2>
+                <h2>Options</h2>
                 <span className="close" onClick={ modal.closeModal }>&times;</span>
               </div>
               <div className="options-content">
@@ -201,16 +230,21 @@ export default class Main extends Component
                   <button id="timer-30" onClick={() => modal.setTimer('timer-30') }>30</button>&nbsp;
                   <button id="timer-60" onClick={() => modal.setTimer('timer-60') }>60</button>&nbsp;
                   <button id="timer-120" onClick={() => modal.setTimer('timer-120') }>120</button>&nbsp;
-                  <button id="timer-240" onClick={() => modal.setTimer('timer-240') }>240</button>&nbsp;
+                  <button id="timer-240" onClick={() => modal.setTimer('timer-240') }>240</button>
                 </div>
                 <div className="difficulty-options">
                   <h3>Difficulty:</h3>
                   <button id="diff-easy" onClick={ this.diffEasy }>Easy</button>&nbsp;
                   <button id="diff-medium" onClick={ this.diffMedium }>Medium</button>&nbsp;
                   <button id="diff-hard" onClick={ this.diffHard }>Hard</button>&nbsp;
-                  <button id="diff-expert" onClick={ this.diffExpert }>Expert</button>&nbsp;
+                  <button id="diff-expert" onClick={ this.diffExpert }>Expert</button>
                   <br/>
                   <button id="diff-random" onClick={ this.diffRandom }>Randomize</button>
+                  {/* <button id="timer-custom" onClick={ this.timerCustom }>Custom</button> */}
+                </div>
+                <div className="instant-death-option">
+                  <h3>Instant Death:</h3>
+                  <button id="is-death" onClick={ this.instantDeath }>Off</button>
                   {/* <button id="timer-custom" onClick={ this.timerCustom }>Custom</button> */}
                 </div>
               </div>
@@ -251,7 +285,7 @@ export default class Main extends Component
               </div>
               <div className="bottom-row-container">
                 <div className="options" onClick={ modal.openModal }>
-                  <img src="assets/img/settings.svg" width="25px" alt=""/>
+                  <img src="assets/img/cog.svg" width="25px" alt=""/>
                 </div>
                 <div className="wpm-container">Errors: <span id="errors">0</span> | WPM: <span id="net-wpm">0</span></div>
               </div>

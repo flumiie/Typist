@@ -35,11 +35,14 @@
 .options-title h2 { margin: 2px 150px 0 }
 
 .timer-options,
-.difficulty-options { width: 100% }
+.difficulty-options,
+.instant-death-option { width: 100% }
 .timer-options h3,
-.difficulty-options h3 { margin: 20px auto 10px }
+.difficulty-options h3,
+.instant-death-option h3 { margin: 20px auto 10px }
 .timer-options button,
-.difficulty-options button
+.difficulty-options button,
+.instant-death-option button
 {
     font-size: 20px;
     padding: 7px;
@@ -49,7 +52,8 @@
     background: rgb(156, 144, 120)
 }
 .timer-options button:hover,
-.difficulty-options button:hover
+.difficulty-options button:hover,
+.instant-death-option button:hover
 {
     color: white;
     background: orange
