@@ -37,15 +37,6 @@ function digitalTimer()
 
 function calc()
 {
-    const setNumWordsInText = b => {
-        let s = b
-        s = s.replace(/(^\s*)|(\s*$)/gi, "")
-        s = s.replace(/[ ]{2,}/gi, " ")
-        s = s.replace(/\n /, "\n")
-        return s.split(" ").length
-    }
-    const updateWPM = (t, w) => (w / t) * 60
-    
     let wrongWords = [], gw = [], errors = 0, minute, second
     for(var i = 0; i < wrongWordList.length; i++)
     {
@@ -65,9 +56,8 @@ function calc()
             errors += 1
     }
 
-    const numWordsInText = setNumWordsInText(grossWords.join(' '))
-    const grossWPM = updateWPM(second, numWordsInText)
-    const netWPM = grossWPM - (errors / minute)
+    const CPM = grossWords.join(' ').length / minute
+    const netWPM = (CPM / 5) - (errors / minute)
     
     $('.wpm-container').addClass('res-highlight')
     void document.querySelector('.wpm-container').offsetWidth
@@ -273,9 +263,9 @@ $(document).ready(function()
         {
             $('#typing-box input').val('')
             setTimeout(() => { $('#typing-box input').val('') }, 1)
+
             let escape = ''
             if(counter < 10) escape = '\\3'
-
             toType = $('.to-type p#' + escape + counter).html()
 
             if(typedWord == ''){}
