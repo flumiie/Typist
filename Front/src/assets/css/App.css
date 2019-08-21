@@ -1,0 +1,231 @@
+@font-face
+{
+  font-family: DSDigital;
+  src: url(../fonts/DS-DIGI.TTF);
+}
+
+*
+{
+  font-family: 'Inconsolata', monospace;
+  transition: background-color 0.2s ease, height 0.25s ease
+}
+.container
+{
+  text-align: center
+}
+.header
+{
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white
+}
+.whole-bag-of-jellybean
+{
+  border-radius: 10px;
+  width: 50%;
+  background: gray
+}
+/* .hidden-elements
+{
+  position: absolute;
+  height: 100%;
+  width: 22.5%;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  background: red;
+} */
+.top-container
+{
+  display: inline-flex;
+  width: 97%;
+  justify-content: space-between;
+  margin: 15px auto 7px
+}
+.top-container .title { display: flex }
+.top-container .timer-container { display: inline-flex }
+
+.timer { width: 75px }
+.timer p
+{
+  position: absolute;
+  display: inline-flex;
+  font-family: 'DSDigital';
+  margin: 0 0 0 auto
+}
+.timer p:nth-child(1) { right: 27.5% }
+.timer p:nth-child(2) { right: 26.8% }
+.timer p:nth-child(3) { right: 26.1% }
+
+.typing-container { height: 3.35em }
+#typing-box
+{
+  position: relative;
+  background: gray;
+  padding: 15px 0;
+  margin-top: -20px;
+  vertical-align: auto;
+  border-radius: 10px
+}
+#typing-box input
+{
+  font-size: 20px;
+  border: none;
+  width: 75%;
+  height: 45px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px
+}
+#typing-box button
+{
+  width: 50px;
+  height: 47px;
+  border: none;
+  background: rgb(156, 144, 120);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  
+  background-image: linear-gradient(orange 50%, orange 50%);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  transition: background-size .25s ease-in, color .5s ease
+}
+#typing-box button:hover
+{
+  background-size: 100% 100%;
+  color:white
+}
+
+.to-type
+{
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  height: 3.5em;
+  padding: 0 5%
+}
+.to-type span p
+{
+  display: inline-flex;
+  margin: -1.5px auto;
+  padding: 5px
+}
+
+#redo
+{
+  font-size: 23px
+}
+
+.bottom-row-container
+{
+  z-index: 2;
+  display: inline-flex;
+  width: 97%;
+  margin-bottom: 7px;
+  justify-content: space-between
+}
+#diff-random
+{
+  margin-top: 8px;
+  width: 150px
+}
+.wpm-container
+{
+  border-radius: 5px;
+  padding: 0 7px;
+  font-size: 26px
+}
+.res-highlight
+{
+  position: relative;
+  animation: highlight 1s normal forwards ease
+}
+
+.footer
+{
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white
+}
+.footer a
+{
+  text-decoration: none;
+  color: orange
+}
+.footer a:hover { color: #0CC }
+
+#page-stats
+{
+  opacity: 0
+}
+
+.desktop { display: block }
+.mobile-unsupported
+{
+  position: relative;
+  height: 100vh
+}
+.mobile-unsupported,
+.mu-message { display: none }
+.mu-message
+{
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  margin: 0;
+  padding: 0 15%;
+  font-size: 27px
+}
+
+@keyframes highlight
+{
+  0% { background: wheat }
+  65% { background: wheat }
+  100% { background: '' }
+}
+
+@media (width: 1366px)
+{
+  .timer p:nth-child(1) { right: 25.5% }
+  .timer p:nth-child(2) { right: 24.55% }
+  .timer p:nth-child(3) { right: 23.6% }
+}
+@media (max-width: 1024px)
+{
+  .whole-bag-of-jellybean { width: 85% }
+  #typing-box input { width: 80% }
+  .timer p:nth-child(1) { right: 14% }
+  .timer p:nth-child(2) { right: 12% }
+  .timer p:nth-child(3) { right: 10% }
+  /* .mobile-unsupported,
+  .mu-message { display: block } */
+}
+@media (max-width: 800px)
+{
+  #typing-box { margin-top: -10px }
+  #typing-box input { width: 80% }
+  .timer p:nth-child(1) { right: 14% }
+  .timer p:nth-child(2) { right: 12% }
+  .timer p:nth-child(3) { right: 10% }
+  /* .mobile-unsupported,
+  .mu-message { display: block } */
+}
+@media (max-width: 420px)
+{
+  .whole-bag-of-jellybean { width: 100% }
+  .timer p:nth-child(1) { right: 10% }
+  .timer p:nth-child(2) { right: 7.5% }
+  .timer p:nth-child(3) { right: 5% }
+  /* .mobile-unsupported,
+  .mu-message { display: block } */
+}
