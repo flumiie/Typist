@@ -7,7 +7,7 @@
 *
 {
   font-family: 'Inconsolata', monospace;
-  transition: background-color 0.2s ease, height 0.25s ease
+  transition: background-color 0s ease, height 0.25s ease
 }
 .container
 {

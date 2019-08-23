@@ -261,10 +261,12 @@ $(document).ready(function()
     {
         if(event.which == 32 || event.keyCode == 32)
         {
+            let ipt = $('#typing-box input').val()
             $('#typing-box input').val('')
             setTimeout(() => { $('#typing-box input').val('') }, 1)
 
-            let escape = ''
+            let cookie = document.cookie.split(' ').join('').split(';'),
+                escape = ''
             if(counter < 10) escape = '\\3'
             toType = $('.to-type p#' + escape + counter).html()
 
@@ -290,6 +292,14 @@ $(document).ready(function()
                         $('.to-type p#' + escape + counter).css('background-color', '')
                         correctWordList.push('')
                         wrongWordList.push(toType)
+
+                        if(cookie.indexOf('instant-death=on') >= 0)
+                        {
+                            stopStartTimer()
+                            if(ipt != '') ipt += ' <- Instant Death!'
+                            else ipt = 'Instant Death!'
+                            setTimeout(() => $('#typing-box input').attr('disabled', true).css('background-color', '').val(ipt), 2)
+                        }
 
                         // userTyped.push(typedWord)
                         // if(userTyped.length >= 8)
