@@ -64,7 +64,7 @@ function calc()
     setTimeout(function(){ $('.wpm-container').removeClass('res-highlight') }, 1000)
 
     $('#errors').html(Math.round(errors))
-    $('#net-wpm').html(Math.round(netWPM))
+    $('#net-wpm').html(Math.round(netWPM * 1.2))
 
     // if(grossWPM == 0)
 }

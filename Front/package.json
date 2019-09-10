@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://fralyx.github.io/Typist",
   "dependencies": {
+    "eslint-utils": "^1.4.2",
     "gh-pages": "^2.0.1",
     "jquery": "^3.4.1",
     "react": "^16.8.6",
